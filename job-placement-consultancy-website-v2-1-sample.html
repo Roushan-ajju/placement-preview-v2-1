@@ -1,0 +1,990 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="data:," />
+    <title>Job Placement Consultancy Website v2.1 Sample</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      :root{
+        --paper:#FAF6EF; --paper-2:#F3ECDC; --card:#FFFDF7;
+        --ink:#29201A; --ink-soft:#4A3E33; --muted:#77675A;
+        --line:#DED2BE; --line-strong:#C9B998;
+        --accent:#E85D26; --accent-dark:#C74A1B; --accent-soft:#FBE9DF;
+        --forest:#1E4D2B; --forest-deep:#173D21; --forest-text:#F4EEDF; --forest-muted:#C4D2BC;
+        --gold:#C9A962;
+        --ok:#2E7D46; --warn:#B97A16;
+        --radius:14px;
+        --shadow:0 10px 30px rgba(41,32,26,.08);
+      }
+      @media (prefers-color-scheme: dark){
+        :root{
+          --paper:#221B14; --paper-2:#2A2118; --card:#2C2318;
+          --ink:#F3EADA; --ink-soft:#DCCDB4; --muted:#B3A186;
+          --line:#4A3B29; --line-strong:#66543A;
+          --accent:#F0713C; --accent-dark:#F0713C; --accent-soft:#3D2A1D;
+          --forest:#14331D; --forest-deep:#0F2817; --forest-text:#F4EEDF; --forest-muted:#AFC4A6;
+          --shadow:0 10px 30px rgba(0,0,0,.35);
+        }
+      }
+      *{box-sizing:border-box}
+      html{scroll-behavior:smooth}
+      body{margin:0;background:var(--paper);color:var(--ink);font-family:"Inter",system-ui,sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+      h1,h2,h3,.serif{font-family:"Fraunces",Georgia,serif;font-weight:500;line-height:1.12;letter-spacing:-.01em}
+      a{color:var(--accent-dark)}
+      button,[role="button"],select,summary,input:not([type="checkbox"],[type="radio"]),textarea{font:inherit}
+      button,select,summary,input:not([type="checkbox"],[type="radio"]){min-height:2.5rem}
+      .wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+      .hidden{display:none !important}
+
+      /* ---------- presentation bar ---------- */
+      .presbar{background:var(--ink);color:var(--paper)}
+      .presbar .wrap{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;justify-content:space-between;padding-top:8px;padding-bottom:8px}
+      .presbar .tag{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;opacity:.85}
+      .viewswitch{display:flex;background:rgba(255,255,255,.12);border-radius:999px;padding:3px;gap:2px}
+      .viewswitch button{border:0;background:transparent;color:inherit;border-radius:999px;padding:6px 16px;min-height:2.25rem;cursor:pointer;font-size:.88rem;font-weight:600}
+      .viewswitch button[aria-pressed="true"]{background:var(--paper);color:var(--ink)}
+
+      /* ---------- guarantee strip ---------- */
+      .strip{background:var(--forest);color:var(--forest-text)}
+      .strip .wrap{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:center;justify-content:center;text-align:center;padding-top:9px;padding-bottom:9px;font-size:.92rem}
+      .strip a{color:var(--gold);font-weight:600;text-decoration:none;border-bottom:1px solid var(--gold);padding:4px 0}
+
+      /* ---------- site header ---------- */
+      .sitehead{border-bottom:1px solid var(--line)}
+      .sitehead .wrap{display:flex;align-items:center;gap:18px;padding-top:14px;padding-bottom:14px;flex-wrap:wrap}
+      .brand{font-family:"Fraunces",serif;font-size:1.45rem;font-weight:600;color:var(--ink);text-decoration:none;margin-right:auto}
+      .brand em{color:var(--accent);font-style:italic}
+      .brand small{display:block;font-family:"Inter",sans-serif;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:600}
+      nav.mainnav{display:flex;gap:4px;flex-wrap:wrap}
+      nav.mainnav a{color:var(--ink-soft);text-decoration:none;font-size:.93rem;font-weight:500;padding:10px 10px;border-radius:8px}
+      nav.mainnav a:hover{background:var(--paper-2)}
+      .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;border:1px solid transparent;padding:10px 22px;min-height:2.75rem;font-weight:600;cursor:pointer;text-decoration:none;font-size:.95rem;transition:transform .15s ease, background .15s ease}
+      .btn-accent{background:var(--accent);color:#fff}
+      .btn-accent:hover{background:var(--accent-dark)}
+      .btn-outline{background:transparent;border-color:var(--line-strong);color:var(--ink)}
+      .btn-outline:hover{background:var(--paper-2)}
+      .btn-ghost{background:transparent;color:var(--accent-dark);padding:10px 8px}
+      .btn:active{transform:scale(.98)}
+
+      /* ---------- hero ---------- */
+      .hero{padding:56px 0 0;border-bottom:1px solid var(--line)}
+      .hero-grid{display:grid;grid-template-columns:1fr;gap:28px}
+      @media(min-width:900px){.hero-grid{grid-template-columns:1.9fr 1fr}}
+      .hero h1{font-size:clamp(2.5rem,6.2vw,4.4rem);margin:0 0 18px}
+      .hero h1 .hl{font-style:italic;color:var(--accent);position:relative;white-space:nowrap}
+      .hero h1 .hl svg{position:absolute;left:0;right:0;bottom:-.18em;width:100%;height:.32em}
+      .hero .side{border-left:3px solid var(--gold);padding-left:18px;color:var(--ink-soft);font-size:1.02rem;align-self:start}
+      .hero .side strong{color:var(--ink)}
+      .pathfinder{margin:36px 0 8px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px}
+      .pathfinder .pf-label{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700;margin:0 0 12px}
+      .pf-sentence{display:flex;flex-wrap:wrap;align-items:center;gap:10px;font-family:"Fraunces",serif;font-size:clamp(1.15rem,2.6vw,1.5rem)}
+      .pf-sentence select{font-family:"Fraunces",serif;font-size:1em;color:var(--accent-dark);background:var(--accent-soft);border:0;border-bottom:2px solid var(--accent);border-radius:8px 8px 0 0;padding:6px 10px;cursor:pointer;max-width:100%}
+      .pf-result{margin-top:20px;border-top:1px dashed var(--line-strong);padding-top:18px}
+      .pf-result h3{font-size:1.5rem;margin:0 0 4px}
+      .pf-result .meta{color:var(--muted);font-size:.92rem;margin:0 0 12px}
+      .pf-steps{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px;padding:0;list-style:none}
+      .pf-steps li{background:var(--paper-2);border-radius:999px;padding:6px 14px;font-size:.86rem;font-weight:500}
+      .pf-roles{font-size:.95rem}
+      .pf-roles a{font-weight:600}
+      .placed-line{margin:26px 0 0;padding:16px 0;border-top:1px solid var(--line);font-size:.95rem;color:var(--ink-soft)}
+      .placed-line strong{color:var(--ink)}
+      .marquee{overflow:hidden;border-top:1px solid var(--line);margin-top:8px;padding:12px 0;mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+      .marquee-track{display:flex;gap:0;width:max-content;animation:scrollx 42s linear infinite}
+      .marquee span{font-family:"Fraunces",serif;font-size:1.05rem;color:var(--muted);padding:0 26px;white-space:nowrap}
+      .marquee span::after{content:"·";margin-left:26px;color:var(--line-strong)}
+      @keyframes scrollx{to{transform:translateX(-50%)}}
+      @media (prefers-reduced-motion: reduce){.marquee-track{animation:none} html{scroll-behavior:auto}}
+
+      /* ---------- sections ---------- */
+      section.block{padding:64px 0}
+      section.block.alt{background:var(--paper-2)}
+      .sec-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 20px;margin-bottom:28px}
+      .sec-head h2{font-size:clamp(1.9rem,4vw,2.7rem);margin:0}
+      .sec-head .count{color:var(--accent-dark);font-weight:700}
+      .sec-head p{color:var(--muted);margin:0;max-width:56ch}
+      .rule{height:1px;background:var(--line);border:0;margin:0}
+
+      /* ---------- openings ---------- */
+      .filters{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:8px}
+      .filters .search{flex:1 1 220px}
+      .filters input[type="search"],.filters select{background:var(--card);border:1px solid var(--line-strong);border-radius:10px;padding:10px 14px;color:var(--ink)}
+      .tabs{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 6px}
+      .tabs button{border:1px solid var(--line-strong);background:transparent;color:var(--ink-soft);border-radius:999px;padding:8px 18px;min-height:2.5rem;cursor:pointer;font-weight:600;font-size:.9rem}
+      .tabs button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+      .job{border-top:1px solid var(--line)}
+      .job:last-of-type{border-bottom:1px solid var(--line)}
+      .job-head{display:grid;grid-template-columns:auto 1fr auto;gap:6px 18px;align-items:center;width:100%;background:none;border:0;text-align:left;padding:20px 4px;cursor:pointer;color:var(--ink)}
+      .job-num{font-family:"Fraunces",serif;font-style:italic;color:var(--accent);font-size:1.15rem}
+      .job-title{font-family:"Fraunces",serif;font-size:1.3rem;font-weight:600}
+      .job-sub{grid-column:2;color:var(--muted);font-size:.9rem}
+      .job-tags{grid-column:2;display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+      .tagpill{font-size:.76rem;font-weight:600;border:1px solid var(--line-strong);border-radius:999px;padding:3px 10px;color:var(--ink-soft)}
+      .job-chev{grid-row:1 / span 3;font-size:1.3rem;color:var(--muted);transition:transform .2s}
+      .job.open .job-chev{transform:rotate(45deg)}
+      .job-body{padding:0 4px 24px 52px;display:none}
+      .job.open .job-body{display:block}
+      .job-body h4{margin:16px 0 4px;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+      .job-body p{margin:0;color:var(--ink-soft);max-width:68ch}
+      .job-body ul{margin:4px 0 0;padding-left:20px;color:var(--ink-soft)}
+      .job-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+      .wa-link{display:inline-flex;align-items:center;gap:8px;min-height:2.75rem;padding:10px 18px;border-radius:999px;border:1px solid var(--line-strong);color:var(--ink);text-decoration:none;font-weight:600;font-size:.93rem}
+      .wa-link:hover{background:var(--paper-2)}
+      .no-results{padding:28px 4px;color:var(--muted)}
+
+      /* ---------- journey ---------- */
+      .journey{display:grid;gap:0}
+      @media(min-width:900px){.journey{grid-template-columns:repeat(5,1fr);gap:18px}}
+      .step{border-top:3px solid var(--line-strong);padding:18px 6px 22px;position:relative}
+      .step.active{border-top-color:var(--accent)}
+      .step .n{font-family:"Fraunces",serif;font-style:italic;font-size:1rem;color:var(--accent)}
+      .step h3{font-size:1.3rem;margin:6px 0 6px}
+      .step p{margin:0;color:var(--muted);font-size:.93rem}
+
+      /* ---------- forest chapter ---------- */
+      .forest{background:var(--forest);color:var(--forest-text)}
+      .forest h2{font-size:clamp(2rem,4.4vw,3rem);margin:0 0 10px}
+      .forest .lede{color:var(--forest-muted);max-width:60ch;margin:0 0 34px;font-size:1.05rem}
+      .commitments{display:grid;gap:0}
+      @media(min-width:800px){.commitments{grid-template-columns:1fr 1fr;gap:0 44px}}
+      .commit{border-top:1px solid rgba(244,238,223,.25);padding:20px 0}
+      .commit .cn{color:var(--gold);font-family:"Fraunces",serif;font-style:italic}
+      .commit h3{margin:4px 0 6px;font-size:1.35rem}
+      .commit p{margin:0;color:var(--forest-muted)}
+
+      /* ---------- stories ---------- */
+      .story{border-top:1px solid var(--line);padding:34px 0}
+      .story:first-of-type{border-top:0;padding-top:6px}
+      .story blockquote{font-family:"Fraunces",serif;font-size:clamp(1.4rem,3vw,2rem);line-height:1.3;margin:0 0 14px;font-style:italic}
+      .story .who{font-weight:600}
+      .route{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:10px;font-size:.92rem;color:var(--muted)}
+      .route .from,.route .to{background:var(--card);border:1px solid var(--line-strong);border-radius:8px;padding:5px 12px;color:var(--ink);font-weight:600}
+      .route .arrow{color:var(--accent);font-weight:700}
+
+      /* ---------- training bento ---------- */
+      .bento{display:grid;gap:14px;grid-template-columns:1fr}
+      @media(min-width:800px){.bento{grid-template-columns:repeat(4,1fr)}.bento .tile.big{grid-column:span 2;grid-row:span 2}}
+      .tile{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px}
+      .tile h3{margin:0 0 8px;font-size:1.3rem}
+      .tile.big h3{font-size:1.8rem}
+      .tile p{margin:0;color:var(--muted);font-size:.94rem}
+      .tile .k{font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-dark);font-weight:700}
+
+      /* ---------- mentors ---------- */
+      .mentors{display:grid;gap:14px;grid-template-columns:1fr}
+      @media(min-width:800px){.mentors{grid-template-columns:repeat(3,1fr)}}
+      .mentor{border-top:3px solid var(--gold);padding:18px 4px 4px}
+      .mentor .avatar{width:52px;height:52px;border-radius:50%;background:var(--forest);color:var(--forest-text);display:flex;align-items:center;justify-content:center;font-family:"Fraunces",serif;font-size:1.2rem;margin-bottom:12px}
+      .mentor h3{margin:0;font-size:1.25rem}
+      .mentor .dom{color:var(--accent-dark);font-weight:600;font-size:.88rem}
+      .mentor p{color:var(--muted);font-size:.93rem;margin:8px 0 0}
+
+      /* ---------- FAQ ---------- */
+      .faq{border-top:1px solid var(--line)}
+      .faq details{border-bottom:1px solid var(--line)}
+      .faq summary{cursor:pointer;list-style:none;padding:18px 4px;font-family:"Fraunces",serif;font-size:1.15rem;font-weight:600;display:flex;justify-content:space-between;gap:16px;align-items:center;min-height:3rem}
+      .faq summary::-webkit-details-marker{display:none}
+      .faq summary .plus{color:var(--accent);font-size:1.4rem;line-height:1;transition:transform .2s;flex:none}
+      .faq details[open ] summary .plus{transform:rotate(45deg)}
+      .faq .ans{padding:0 4px 20px;color:var(--ink-soft);max-width:70ch}
+      .faq .ans p{margin:0}
+
+      /* ---------- closing / form ---------- */
+      .closing{display:grid;gap:36px;grid-template-columns:1fr}
+      @media(min-width:950px){.closing{grid-template-columns:1fr 1.25fr;gap:52px}}
+      .letter h2{font-size:clamp(1.9rem,3.6vw,2.5rem);margin:0 0 16px}
+      .letter p{color:var(--ink-soft)}
+      .letter .sign{font-family:"Fraunces",serif;font-style:italic;font-size:1.3rem;margin-top:22px;color:var(--ink)}
+      .after-apply{margin-top:28px;border-top:1px solid var(--line);padding-top:20px}
+      .after-apply h3{font-size:1.05rem;margin:0 0 12px;font-family:"Inter",sans-serif;font-weight:700}
+      .timeline{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+      .timeline li{display:flex;gap:12px;font-size:.94rem;color:var(--ink-soft)}
+      .timeline .when{flex:none;font-weight:700;color:var(--accent-dark);min-width:86px}
+      form.apply{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:28px}
+      form.apply fieldset{border:0;margin:0 0 24px;padding:0}
+      form.apply legend{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700;padding:0;margin-bottom:14px}
+      .fgrid{display:grid;gap:16px;grid-template-columns:1fr}
+      @media(min-width:640px){.fgrid.two{grid-template-columns:1fr 1fr}}
+      .field label{display:block;font-size:.88rem;font-weight:600;margin-bottom:4px}
+      .field input,.field select,.field textarea{width:100%;background:transparent;border:0;border-bottom:2px solid var(--line-strong);border-radius:0;padding:9px 2px;color:var(--ink)}
+      .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-bottom-color:var(--accent)}
+      .field textarea{resize:vertical;min-height:64px}
+      .upload{border:1.5px dashed var(--line-strong);border-radius:12px;padding:18px;text-align:center;cursor:pointer;display:block}
+      .upload:hover{border-color:var(--accent)}
+      .upload .u-title{font-weight:600}
+      .upload .u-sub{font-size:.85rem;color:var(--muted)}
+      .upload .u-file{font-size:.9rem;color:var(--accent-dark);font-weight:600;margin-top:6px;word-break:break-all}
+      .privacy{font-size:.86rem;color:var(--muted);margin:10px 0 0;text-align:center}
+      .privacy strong{color:var(--ink-soft)}
+      .form-success{background:var(--forest);color:var(--forest-text);border-radius:var(--radius);padding:30px}
+      .form-success h3{font-size:1.7rem;margin:0 0 8px}
+      .form-success p{color:var(--forest-muted);margin:0 0 6px}
+      .form-success .sum{background:rgba(255,255,255,.08);border-radius:10px;padding:14px 18px;margin:16px 0;color:var(--forest-text)}
+      .form-success .sum div{display:flex;justify-content:space-between;gap:14px;padding:4px 0;font-size:.94rem}
+      .form-success .sum span{opacity:.75}
+
+      /* ---------- footer ---------- */
+      footer.site{border-top:1px solid var(--line);padding:44px 0 34px;background:var(--paper-2)}
+      footer.site .big{font-family:"Fraunces",serif;font-size:clamp(2rem,6vw,3.4rem);margin:0 0 18px}
+      footer.site .cols{display:flex;flex-wrap:wrap;gap:14px 44px;font-size:.93rem;color:var(--ink-soft)}
+      footer.site a{color:var(--ink-soft)}
+      footer.site .fine{margin-top:26px;font-size:.82rem;color:var(--muted);border-top:1px solid var(--line);padding-top:16px}
+
+      /* ---------- modal ---------- */
+      .modal-back{position:fixed;inset:0;background:rgba(20,14,8,.55);display:none;align-items:flex-start;justify-content:center;padding:22px 14px;z-index:60;overflow-y:auto}
+      .modal-back.open{display:flex}
+      .modal{background:var(--paper);border-radius:18px;max-width:560px;width:100%;padding:28px;box-shadow:var(--shadow);position:relative}
+      .modal h2{margin:0 0 4px;font-size:1.8rem}
+      .modal .sub{color:var(--muted);margin:0 0 18px;font-size:.94rem}
+      .modal .close{position:absolute;top:12px;right:12px;width:44px;height:44px;border-radius:50%;border:1px solid var(--line-strong);background:var(--card);cursor:pointer;font-size:1.1rem;color:var(--ink)}
+      .mtabs{display:flex;gap:6px;margin-bottom:20px}
+      .mtabs button{flex:1;border:1px solid var(--line-strong);background:transparent;border-radius:999px;padding:10px;min-height:2.75rem;font-weight:600;cursor:pointer;color:var(--ink)}
+      .mtabs button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+      .modal .field{margin-bottom:14px}
+      .modal .field input{width:100%;background:var(--card);border:1px solid var(--line-strong);border-bottom:2px solid var(--line-strong);border-radius:10px;padding:10px 12px}
+      .cand-note{background:var(--accent-soft);border-radius:10px;padding:12px 16px;font-size:.92rem;margin-top:16px}
+      .preview{margin-top:22px;border:1px solid var(--line-strong);border-radius:14px;padding:18px;background:var(--card)}
+      .preview h3{margin:0 0 2px;font-size:1.15rem}
+      .preview .psub{color:var(--muted);font-size:.85rem;margin:0 0 14px}
+      .progress{height:10px;border-radius:99px;background:var(--paper-2);overflow:hidden;margin:8px 0 4px}
+      .progress i{display:block;height:100%;background:var(--accent);border-radius:99px}
+      .preview .psteps{display:flex;justify-content:space-between;font-size:.72rem;color:var(--muted);gap:4px;flex-wrap:wrap}
+      .preview .app-line{display:flex;justify-content:space-between;gap:10px;border-top:1px dashed var(--line-strong);padding-top:12px;margin-top:14px;font-size:.92rem}
+      .pill{display:inline-block;border-radius:999px;padding:3px 12px;font-size:.78rem;font-weight:700;white-space:nowrap}
+      .pill-new{background:#E3ECFB;color:#274B8F}
+      .pill-contacted{background:#FDF0D5;color:#8A5A00}
+      .pill-training{background:#E7DEF8;color:#4B3485}
+      .pill-interviewing{background:#FBE0D2;color:#9A3E10}
+      .pill-placed{background:#DDF0E1;color:#1E6B34}
+      @media (prefers-color-scheme: dark){
+        .pill-new{background:#26354F;color:#A9C4F5}.pill-contacted{background:#4A3A14;color:#F2CE7E}
+        .pill-training{background:#372A55;color:#C9B8F2}.pill-interviewing{background:#4E2C18;color:#F5B98F}
+        .pill-placed{background:#1E4028;color:#9BD8AB}
+      }
+
+      /* ---------- dashboard ---------- */
+      .dash{padding:34px 0 70px}
+      .dash-head{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:baseline;margin-bottom:6px}
+      .dash-head h2{font-size:clamp(1.9rem,4vw,2.6rem);margin:0}
+      .dash-note{color:var(--muted);font-size:.93rem;max-width:70ch}
+      .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:24px 0}
+      @media(min-width:850px){.stats{grid-template-columns:repeat(5,1fr)}}
+      .stat{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px}
+      .stat .num{font-family:"Fraunces",serif;font-size:2rem;line-height:1}
+      .stat .lab{font-size:.8rem;color:var(--muted);font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-top:6px}
+      .dash-tools{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px}
+      .dash-tools input[type="search"],.dash-tools select{background:var(--card);border:1px solid var(--line-strong);border-radius:10px;padding:10px 14px;color:var(--ink)}
+      .dash-tools input[type="search"]{flex:1 1 200px}
+      .tablewrap{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--card)}
+      table.dash-table{width:100%;border-collapse:collapse;font-size:.93rem}
+      table.dash-table th{text-align:left;font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:14px 16px;border-bottom:1px solid var(--line);background:var(--paper-2)}
+      table.dash-table td{padding:14px 16px;border-bottom:1px solid var(--line);vertical-align:middle}
+      table.dash-table tr:last-child td{border-bottom:0}
+      .cand-name{font-weight:600}
+      .cand-sub{color:var(--muted);font-size:.83rem}
+      .resume-btn{border:1px solid var(--line-strong);background:transparent;border-radius:8px;padding:7px 13px;min-height:2.25rem;cursor:pointer;font-weight:600;font-size:.85rem;color:var(--ink)}
+      .resume-btn:hover{background:var(--paper-2)}
+      select.status-sel{border-radius:999px;padding:6px 10px;font-weight:600;font-size:.85rem;border:1px solid var(--line-strong);background:var(--card);color:var(--ink);min-height:2.25rem}
+      @media(max-width:760px){
+        table.dash-table thead{display:none}
+        table.dash-table,table.dash-table tbody,table.dash-table tr,table.dash-table td{display:block;width:100%}
+        table.dash-table tr{border-bottom:1px solid var(--line);padding:10px 4px}
+        table.dash-table td{border-bottom:0;padding:5px 16px}
+        table.dash-table td::before{content:attr(data-l);display:block;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700}
+      }
+      .dash-foot{margin-top:18px;font-size:.86rem;color:var(--muted)}
+      .toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(20px);background:var(--ink);color:var(--paper);padding:12px 20px;border-radius:999px;font-size:.92rem;font-weight:600;opacity:0;pointer-events:none;transition:all .25s ease;z-index:80;max-width:92vw;text-align:center}
+      .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+      .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+      .reveal.in{opacity:1;transform:none}
+      @media (prefers-reduced-motion: reduce){.reveal{opacity:1;transform:none;transition:none}}
+    </style>
+  </head>
+  <body>
+
+    <!-- Presentation bar -->
+    <div class="presbar">
+      <div class="wrap">
+        <span class="tag">Draft v2.1 · Presentation sample</span>
+        <div class="viewswitch" role="group" aria-label="Choose presentation view">
+          <button type="button" id="btnViewSite" aria-pressed="true">Public site</button>
+          <button type="button" id="btnViewDash" aria-pressed="false">HR dashboard mock</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= PUBLIC SITE ================= -->
+    <div id="siteView">
+
+      <div class="strip">
+        <div class="wrap">
+          <span>Placements in top MNCs · Training &amp; dedicated support at every step</span>
+          <a href="#openings">See live openings</a>
+        </div>
+      </div>
+
+      <header class="sitehead">
+        <div class="wrap">
+          <a class="brand" href="#top">Aspire <em>Careers</em><small>Placement Consultancy · Sample</small></a>
+          <nav class="mainnav" aria-label="Site">
+            <a href="#openings">Openings</a>
+            <a href="#journey">Your journey</a>
+            <a href="#stories">Stories</a>
+            <a href="#training">Training</a>
+            <a href="#mentors">Mentors</a>
+            <a href="#faq">FAQ</a>
+          </nav>
+          <button type="button" class="btn btn-accent" id="openCandidate">Candidate Sign In / Sign Up</button>
+        </div>
+      </header>
+
+      <!-- Hero -->
+      <div class="hero" id="top">
+        <div class="wrap">
+          <div class="hero-grid">
+            <div>
+              <h1>Get placed in a <span class="hl">top MNC<svg viewBox="0 0 200 12" preserveAspectRatio="none" aria-hidden="true"><path d="M2 9 C 60 2, 140 2, 198 8" fill="none" stroke="var(--gold)" stroke-width="4" stroke-linecap="round"/></svg></span> — with a team beside you at every step.</h1>
+            </div>
+            <div class="side">
+              <p>For <strong>freshers</strong> starting out, <strong>experienced professionals</strong> moving up, and anyone <strong>changing domain</strong> — one clear path, guided from your first call to your first day.</p>
+            </div>
+          </div>
+
+          <div class="pathfinder">
+            <p class="pf-label">Find your path</p>
+            <div class="pf-sentence">
+              <span>I'm currently in</span>
+              <select id="pfFrom" aria-label="Your current field">
+                <option value="support">IT Support</option>
+                <option value="nonit">Non-IT / Operations</option>
+                <option value="fresher">No experience yet — I'm a fresher</option>
+                <option value="sales">Sales &amp; Customer Service</option>
+                <option value="dev">Software Development</option>
+              </select>
+              <span>and I want to move to</span>
+              <select id="pfTo" aria-label="Your target field">
+                <option value="data">Data</option>
+                <option value="dev">Software Development</option>
+                <option value="cloud">Cloud &amp; DevOps</option>
+                <option value="testing">Quality Testing</option>
+                <option value="support">IT Support</option>
+              </select>
+              <button type="button" class="btn btn-accent" id="pfGo">Show my path</button>
+            </div>
+            <div class="pf-result hidden" id="pfResult" aria-live="polite"></div>
+          </div>
+
+          <p class="placed-line"><strong>Recently placed:</strong> Ananya S. — Support Executive → Data Analyst at a leading analytics firm · placed in 13 weeks · <a href="#stories">Read placement stories</a></p>
+        </div>
+        <div class="marquee" aria-hidden="true">
+          <div class="marquee-track" id="marqueeTrack"></div>
+        </div>
+      </div>
+
+      <!-- Openings -->
+      <section class="block" id="openings">
+        <div class="wrap">
+          <div class="sec-head">
+            <h2>Live openings</h2>
+            <span class="count" id="jobCount"></span>
+            <p>Current sample openings with our partner companies. Tap any opening to see the full brief — and the training support available if you're switching into it.</p>
+          </div>
+          <div class="filters">
+            <input type="search" class="search" id="jobSearch" placeholder="Search by role, skill or company…" aria-label="Search openings" />
+            <select id="jobDomain" aria-label="Filter by domain">
+              <option value="">All domains</option>
+            </select>
+            <select id="jobLocation" aria-label="Filter by location">
+              <option value="">All locations</option>
+            </select>
+          </div>
+          <div class="tabs" id="jobTabs" role="group" aria-label="Filter by type">
+            <button type="button" data-f="all" aria-pressed="true">All</button>
+            <button type="button" data-f="IT" aria-pressed="false">IT</button>
+            <button type="button" data-f="Non-IT" aria-pressed="false">Non-IT</button>
+            <button type="button" data-f="Fresher" aria-pressed="false">Fresher</button>
+            <button type="button" data-f="Experienced" aria-pressed="false">Experienced</button>
+          </div>
+          <div id="jobList"></div>
+          <p class="no-results hidden" id="jobNone">No openings match that search right now. Try a different skill or clear the filters — or <a href="#apply">tell us your target role</a> and we'll watch for it.</p>
+        </div>
+      </section>
+
+      <!-- Journey -->
+      <section class="block alt" id="journey">
+        <div class="wrap">
+          <div class="sec-head">
+            <h2>Your journey, step by step</h2>
+            <p>Five steps, one counsellor walking with you through all of them.</p>
+          </div>
+          <div class="journey">
+            <div class="step active reveal"><span class="n">01</span><h3>Assess</h3><p>Your profile, strengths, and skill gaps, understood properly — before anything else begins.</p></div>
+            <div class="step reveal"><span class="n">02</span><h3>Train</h3><p>Focused training and real projects built around your target role, at a pace that suits you.</p></div>
+            <div class="step reveal"><span class="n">03</span><h3>Prepare</h3><p>Resume, LinkedIn, and mock interviews — practised until you walk in ready.</p></div>
+            <div class="step reveal"><span class="n">04</span><h3>Interview</h3><p>Interviews with top MNCs, with honest feedback after every single round.</p></div>
+            <div class="step reveal"><span class="n">05</span><h3>Placed</h3><p>Guidance through your offer, your joining, and your first weeks in the role.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Forest chapter: support -->
+      <section class="block forest">
+        <div class="wrap">
+          <h2>Support, from first call to first day.</h2>
+          <p class="lede">A placement is not a handover. It's a relationship that starts with your first call and stays with you until you've settled into the role — and these four commitments are how we keep it.</p>
+          <div class="commitments">
+            <div class="commit reveal"><span class="cn">— i</span><h3>One dedicated counsellor</h3><p>A single counsellor who knows your case, your goal and your story — you never have to explain yourself twice.</p></div>
+            <div class="commit reveal"><span class="cn">— ii</span><h3>A plan built around your goal</h3><p>Your training and interview plan is shaped around the role <em>you</em> want, not fitted into a standard batch.</p></div>
+            <div class="commit reveal"><span class="cn">— iii</span><h3>Honest feedback, every round</h3><p>After every interview you hear exactly how it went and what to strengthen — no silence, no guessing.</p></div>
+            <div class="commit reveal"><span class="cn">— iv</span><h3>Support that continues</h3><p>We stay in touch through your offer and joining, and while you settle into your first weeks in the role.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Stories -->
+      <section class="block" id="stories">
+        <div class="wrap">
+          <div class="sec-head"><h2>Placement stories</h2><p>Real routes, in their own words. Names and companies are sample content in this draft.</p></div>
+          <article class="story reveal">
+            <blockquote>“I joined as a complete fresher, nervous about everything. My counsellor broke the whole thing into small steps — and one morning I was walking into my first IT job.”</blockquote>
+            <span class="who">Priya K.</span> · Fresher → IT, placed in 11 weeks
+            <div class="route"><span class="from">Fresher, B.Com graduate</span><span class="arrow">→</span><span class="to">IT Support Engineer · Vertex Systems</span></div>
+          </article>
+          <article class="story reveal">
+            <blockquote>“Three years in support, and I thought development was closed to me. The training was built around my shift timings, and the mock interviews made the real ones feel familiar.”</blockquote>
+            <span class="who">Rahul M.</span> · Support → Development, placed in 16 weeks
+            <div class="route"><span class="from">IT Support Executive</span><span class="arrow">→</span><span class="to">Junior Java Developer · CloudNine Technologies</span></div>
+          </article>
+          <article class="story reveal">
+            <blockquote>“I came from retail and had never written a line of code. They started from zero with me — patiently — and I now work with data every single day.”</blockquote>
+            <span class="who">Sneha R.</span> · Non-IT → Tech, placed in 14 weeks
+            <div class="route"><span class="from">Retail Store Associate</span><span class="arrow">→</span><span class="to">Data Analyst · Analytix Labs</span></div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Training -->
+      <section class="block alt" id="training">
+        <div class="wrap">
+          <div class="sec-head"><h2>Training that fits your path</h2><p>Not a fixed course catalogue — the pieces your counsellor assembles around your target role.</p></div>
+          <div class="bento">
+            <div class="tile big reveal"><span class="k">Flagship</span><h3>Domain-Change Programme</h3><p>Our most-loved path: a complete bridge from your current field into your target one — foundations, tools, real projects and interview preparation, sequenced so each step builds on the last. Built for support professionals moving to data or development, and non-IT candidates moving into tech.</p></div>
+            <div class="tile reveal"><span class="k">Skills</span><h3>Technical Training</h3><p>Hands-on training in the exact stack your target role uses, taught through projects rather than lectures.</p></div>
+            <div class="tile reveal"><span class="k">Practice</span><h3>Mock Interviews</h3><p>Repeated practice rounds with detailed feedback, until the real interview feels like one more rehearsal.</p></div>
+            <div class="tile reveal"><span class="k">Profile</span><h3>Resume &amp; LinkedIn</h3><p>A resume that tells your story properly, and a LinkedIn profile that recruiters actually find.</p></div>
+            <div class="tile reveal"><span class="k">Confidence</span><h3>Communication &amp; Soft Skills</h3><p>Speaking clearly, presenting your work, and carrying yourself in interviews and on the job.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Mentors -->
+      <section class="block" id="mentors">
+        <div class="wrap">
+          <div class="sec-head"><h2>Meet your mentors</h2><p>The counsellors and mentors who will know your name — sample profiles in this draft.</p></div>
+          <div class="mentors">
+            <div class="mentor reveal"><div class="avatar" aria-hidden="true">KS</div><h3>Kavitha Sharma</h3><span class="dom">Lead Counsellor · Career Paths</span><p>Builds your overall plan and stays your single point of contact from the first call to your joining day.</p></div>
+            <div class="mentor reveal"><div class="avatar" aria-hidden="true">AV</div><h3>Arun Verma</h3><span class="dom">Mentor · Data &amp; Development</span><p>Runs technical training and project reviews for candidates moving into data and software roles.</p></div>
+            <div class="mentor reveal"><div class="avatar" aria-hidden="true">DN</div><h3>Divya Nair</h3><span class="dom">Mentor · Interviews &amp; Communication</span><p>Leads mock interviews and communication coaching, with honest, specific feedback after every round.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section class="block alt" id="faq">
+        <div class="wrap">
+          <div class="sec-head"><h2>Questions, answered honestly</h2></div>
+          <div class="faq" id="faqList"></div>
+        </div>
+      </section>
+
+      <!-- Closing: letter + form -->
+      <section class="block" id="apply">
+        <div class="wrap">
+          <div class="closing">
+            <div class="letter reveal">
+              <h2>A note from our counsellors</h2>
+              <p>Every career in our stories above began the same way — with one conversation. No pressure, no obligation: tell us where you are and where you'd like to be, and we'll tell you honestly what the path looks like.</p>
+              <p>Fill in the form and your counsellor will call you back. If you'd rather talk first, the openings above each carry a WhatsApp option too.</p>
+              <p class="sign">— The Aspire Careers counsellor team</p>
+              <div class="after-apply">
+                <h3>What happens after you apply</h3>
+                <ul class="timeline">
+                  <li><span class="when">In 24 hours</span><span>A counsellor calls you to understand your goal and your current situation.</span></li>
+                  <li><span class="when">In 3 days</span><span>Your personal path and training plan is ready, built around your target role.</span></li>
+                  <li><span class="when">From there</span><span>Training begins, and interviews follow as you complete each step of your path.</span></li>
+                </ul>
+              </div>
+            </div>
+
+            <div id="formZone">
+              <form class="apply" id="applyForm" novalidate>
+                <fieldset>
+                  <legend>1 · Your details</legend>
+                  <div class="fgrid two">
+                    <div class="field"><label for="fName">Full name *</label><input id="fName" name="name" type="text" autocomplete="name" required placeholder="e.g. Priya Kumar" /></div>
+                    <div class="field"><label for="fPhone">Phone / WhatsApp *</label><input id="fPhone" name="phone" type="tel" autocomplete="tel" required placeholder="e.g. 98765 43210" /></div>
+                  </div>
+                  <div class="field" style="margin-top:16px"><label for="fEmail">Email</label><input id="fEmail" name="email" type="email" autocomplete="email" placeholder="you@example.com" /></div>
+                </fieldset>
+                <fieldset>
+                  <legend>2 · Your goal</legend>
+                  <div class="fgrid two">
+                    <div class="field"><label for="fStatus">Current status</label>
+                      <select id="fStatus" name="status">
+                        <option>Fresher</option><option>Working — IT</option><option>Working — Non-IT</option><option>On a career break</option><option>Final-year student</option>
+                      </select></div>
+                    <div class="field"><label for="fExp">Experience</label>
+                      <select id="fExp" name="experience">
+                        <option>None yet</option><option>0–1 years</option><option>1–3 years</option><option>3–5 years</option><option>5+ years</option>
+                      </select></div>
+                  </div>
+                  <div class="fgrid two" style="margin-top:16px">
+                    <div class="field"><label for="fTarget">Target role</label><input id="fTarget" name="target" type="text" placeholder="e.g. Data Analyst" /></div>
+                    <div class="field"><label for="fOpening">Opening you're applying for</label><input id="fOpening" name="opening" type="text" placeholder="General application" /></div>
+                  </div>
+                  <div class="field" style="margin-top:16px"><label for="fMsg">Anything you'd like us to know</label><textarea id="fMsg" name="message" placeholder="Your situation, your timeline, your questions…"></textarea></div>
+                </fieldset>
+                <fieldset>
+                  <legend>3 · Your resume</legend>
+                  <label class="upload" for="fResume">
+                    <span class="u-title">Upload your resume</span><br />
+                    <span class="u-sub">PDF, DOC or DOCX · optional — you can also share it later</span>
+                    <span class="u-file hidden" id="resumeName"></span>
+                  </label>
+                  <input id="fResume" name="resume" type="file" accept=".pdf,.doc,.docx" class="hidden" />
+                  <p class="privacy"><strong>Your resume is shared only with employers you approve.</strong><br />No ready resume? Don't let that stop you — <strong>we'll help you build one.</strong></p>
+                </fieldset>
+                <button type="submit" class="btn btn-accent" style="width:100%">Request a callback</button>
+                <p class="privacy">Sample form for this presentation draft — submitting shows a confirmation here; nothing is sent or stored.</p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="site">
+        <div class="wrap">
+          <p class="big">Your next role is closer than you think.</p>
+          <div class="cols">
+            <span><strong>Aspire Careers</strong> (sample name)<br />Sample address line, Bengaluru, India</span>
+            <span>Phone: +91 90000 00000 (sample)<br />Email: hello@example.com</span>
+            <span><a href="#openings">Live openings</a><br /><a href="#faq">FAQ</a><br /><a href="#apply">Request a callback</a></span>
+          </div>
+          <p class="fine">Draft v2.1 presentation sample. All roles, companies, people, stories and contact details on this page are illustrative sample content for presentation only — the form, resume upload and candidate sign-in are front-end demonstrations and do not send, store or create anything.</p>
+        </div>
+      </footer>
+    </div>
+
+    <!-- ================= HR DASHBOARD MOCK ================= -->
+    <div id="dashView" class="hidden">
+      <div class="wrap dash">
+        <div class="dash-head">
+          <h2>HR Dashboard</h2>
+          <span class="pill pill-new">Mock · Sample data</span>
+        </div>
+        <p class="dash-note">A presentation mock of the future admin page: the team signs in here to see who has applied, for which opening, and where each candidate stands. In this sample everything is static demonstration data — try searching, filtering, or moving a candidate's status.</p>
+
+        <div class="stats" id="dashStats"></div>
+
+        <div class="dash-tools">
+          <input type="search" id="dashSearch" placeholder="Search by name, role or company…" aria-label="Search applications" />
+          <select id="dashStatusFilter" aria-label="Filter by status">
+            <option value="">All statuses</option>
+            <option>New</option><option>Contacted</option><option>In Training</option><option>Interviewing</option><option>Placed</option>
+          </select>
+          <select id="dashCounsellorFilter" aria-label="Filter by counsellor">
+            <option value="">All counsellors</option>
+          </select>
+        </div>
+
+        <div class="tablewrap">
+          <table class="dash-table">
+            <thead><tr><th>Candidate</th><th>Applied for</th><th>Date</th><th>Resume</th><th>Counsellor</th><th>Status</th></tr></thead>
+            <tbody id="dashBody"></tbody>
+          </table>
+          <p class="no-results hidden" id="dashNone" style="padding:22px 16px">No applications match that search.</p>
+        </div>
+        <p class="dash-foot">Statuses in the real dashboard will be updated by the team as each candidate moves: New → Contacted → In Training → Interviewing → Placed. This mock keeps changes only for this viewing session.</p>
+      </div>
+    </div>
+
+    <!-- Candidate modal -->
+    <div class="modal-back" id="candModal" role="dialog" aria-modal="true" aria-labelledby="candTitle">
+      <div class="modal">
+        <button type="button" class="close" id="candClose" aria-label="Close">✕</button>
+        <h2 id="candTitle">Candidate profile</h2>
+        <p class="sub">Sign in to your candidate page, or create your profile to get started.</p>
+        <div class="mtabs" role="group" aria-label="Sign in or create profile">
+          <button type="button" id="tabSignIn" aria-pressed="true">Sign In</button>
+          <button type="button" id="tabSignUp" aria-pressed="false">Create Profile</button>
+        </div>
+        <form id="candForm">
+          <div class="field hidden" id="candNameField"><label for="cName">Full name</label><input id="cName" type="text" autocomplete="name" placeholder="Your full name" /></div>
+          <div class="field"><label for="cId">Phone or email</label><input id="cId" type="text" autocomplete="username" placeholder="Phone number or email" /></div>
+          <div class="field"><label for="cPass">Password</label><input id="cPass" type="password" autocomplete="current-password" placeholder="••••••••" /></div>
+          <button type="submit" class="btn btn-accent" style="width:100%" id="candSubmit">Sign In</button>
+        </form>
+        <div class="cand-note hidden" id="candNote">Candidate profiles are coming up — your page is the next step. Below is a glimpse of how it will look.</div>
+        <div class="preview" aria-label="Sample candidate page preview">
+          <h3>Sample candidate page — preview</h3>
+          <p class="psub">Illustrative sample profile · not a real account</p>
+          <strong>Ananya S.</strong> · Target role: Data Analyst
+          <div class="progress" role="img" aria-label="Path progress: step 3 of 5, Prepare"><i style="width:60%"></i></div>
+          <div class="psteps"><span>Assess ✓</span><span>Train ✓</span><span>Prepare · now</span><span>Interview</span><span>Placed</span></div>
+          <div class="app-line"><span>Application — Data Analyst, Analytix Labs</span><span class="pill pill-interviewing">Interviewing</span></div>
+          <div class="app-line"><span>Next mock interview</span><span>Tomorrow, 11:00 AM · with Divya N.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="toast" id="toast" role="status"></div>
+
+    <script>
+      (function(){
+        "use strict";
+        var $ = function(id){ return document.getElementById(id); };
+
+        /* ---------- view switch ---------- */
+        var siteView = $("siteView"), dashView = $("dashView");
+        function setView(which){
+          var site = which === "site";
+          siteView.classList.toggle("hidden", !site);
+          dashView.classList.toggle("hidden", site);
+          $("btnViewSite").setAttribute("aria-pressed", site ? "true" : "false");
+          $("btnViewDash").setAttribute("aria-pressed", site ? "false" : "true");
+          window.scrollTo({top:0});
+        }
+        $("btnViewSite").addEventListener("click", function(){ setView("site"); });
+        $("btnViewDash").addEventListener("click", function(){ setView("dash"); });
+
+        /* ---------- toast ---------- */
+        var toastTimer = null;
+        function toast(msg){
+          var t = $("toast"); t.textContent = msg; t.classList.add("show");
+          clearTimeout(toastTimer);
+          toastTimer = setTimeout(function(){ t.classList.remove("show"); }, 3200);
+        }
+
+        /* ---------- marquee ---------- */
+        var mncs = ["Microsoft","Google","Amazon","Accenture","Infosys","Wipro","Deloitte","IBM","Capgemini","Oracle","Adobe","SAP"];
+        var track = $("marqueeTrack"), half = "";
+        mncs.forEach(function(m){ half += "<span>" + m + "</span>"; });
+        track.innerHTML = half + half;
+
+        /* ---------- jobs data ---------- */
+        var JOBS = [
+          {id:1, title:"Data Analyst", company:"Analytix Labs", loc:"Bengaluru", cat:"IT", level:"Fresher", domain:"Data", exp:"0–2 years", skills:["Excel","SQL","Power BI"],
+           about:"Work with business teams to turn raw data into clear dashboards and weekly insight reports that drive real decisions.",
+           doList:["Build and maintain dashboards in Power BI","Write SQL queries to answer business questions","Present findings in simple, clear language"],
+           suits:"Freshers and career-changers with strong number sense. Our Data path covers SQL and Power BI from the ground up.",
+           support:"Domain-Change Programme — Data track, with two live dashboard projects for your portfolio."},
+          {id:2, title:"Junior Java Developer", company:"CloudNine Technologies", loc:"Hyderabad", cat:"IT", level:"Fresher", domain:"Development", exp:"0–1 years", skills:["Java","Spring Boot","REST APIs"],
+           about:"Join a product team building backend services used by enterprise clients, with senior developers reviewing your work daily.",
+           doList:["Build and test REST API endpoints","Fix bugs and write unit tests","Take part in code reviews and sprint planning"],
+           suits:"Freshers with core Java knowledge, and support professionals moving into development.",
+           support:"Development track with guided Spring Boot projects and code-review practice."},
+          {id:3, title:"Cloud Support Associate", company:"Vertex Systems", loc:"Pune", cat:"IT", level:"Experienced", domain:"Cloud & DevOps", exp:"1–3 years", skills:["Azure","Linux","Ticketing tools"],
+           about:"Support enterprise cloud customers: triage incidents, resolve common Azure issues, and escalate with crisp documentation.",
+           doList:["Resolve L1/L2 cloud support tickets","Monitor services and respond to alerts","Document resolutions for the knowledge base"],
+           suits:"Experienced support professionals ready to specialise in cloud platforms.",
+           support:"Cloud track with Azure fundamentals training and scenario-based practice labs."},
+          {id:4, title:"QA Test Engineer", company:"NorthPeak Software", loc:"Chennai", cat:"IT", level:"Experienced", domain:"Testing", exp:"2–4 years", skills:["Manual testing","Selenium","Test cases"],
+           about:"Own test planning for a fintech product: design test cases, run regression cycles, and work closely with developers before every release.",
+           doList:["Design and execute test cases","Automate regression suites with Selenium","Report and track defects to closure"],
+           suits:"Testers with manual experience who want to grow into automation.",
+           support:"Testing track with Selenium project work and interview preparation on real scenarios."},
+          {id:5, title:"IT Support Engineer", company:"Vertex Systems", loc:"Gurugram", cat:"IT", level:"Fresher", domain:"IT Support", exp:"0–1 years", skills:["Windows","Networking basics","Communication"],
+           about:"Be the first line of help for a large office: resolve everyday IT issues, set up workstations, and keep people working.",
+           doList:["Resolve hardware and software tickets","Set up laptops and user accounts","Escalate network issues with clear notes"],
+           suits:"Freshers who enjoy solving problems and speaking with people. Full training is provided on the tools used.",
+           support:"IT Support track with hands-on labs and communication coaching."},
+          {id:6, title:"HR Operations Executive", company:"BrightHire Group", loc:"Mumbai", cat:"Non-IT", level:"Fresher", domain:"Operations", exp:"0–2 years", skills:["MS Office","Coordination","Documentation"],
+           about:"Support the people operations of a growing firm: onboarding paperwork, attendance records, and employee queries.",
+           doList:["Coordinate joining formalities","Maintain employee records accurately","Support payroll inputs and attendance"],
+           suits:"Freshers from any background with good organisation skills and clear communication.",
+           support:"Operations track with workplace-tools training and interview preparation."},
+          {id:7, title:"Business Analyst Trainee", company:"Analytix Labs", loc:"Bengaluru", cat:"IT", level:"Experienced", domain:"Data", exp:"1–3 years", skills:["Requirements","SQL","Stakeholder communication"],
+           about:"Bridge business and engineering teams: gather requirements, map processes, and track delivery for data projects.",
+           doList:["Run requirement-gathering sessions","Write user stories and process maps","Validate delivered features with stakeholders"],
+           suits:"Professionals with some data or operations experience who communicate well.",
+           support:"Data track (advanced) with stakeholder-communication and case-study practice."},
+          {id:8, title:"Customer Success Associate", company:"BrightHire Group", loc:"Remote", cat:"Non-IT", level:"Experienced", domain:"Operations", exp:"1–3 years", skills:["Client handling","CRM tools","Problem solving"],
+           about:"Own a portfolio of client accounts: onboard them, answer their questions, and make sure they get full value from the product.",
+           doList:["Onboard new client accounts","Resolve queries over calls and email","Track account health in the CRM"],
+           suits:"Experienced customer-facing professionals who want a growth path outside pure support.",
+           support:"Operations track with CRM practice and communication coaching."},
+          {id:9, title:"DevOps Engineer", company:"CloudNine Technologies", loc:"Hyderabad", cat:"IT", level:"Experienced", domain:"Cloud & DevOps", exp:"3–5 years", skills:["AWS","CI/CD","Docker","Kubernetes"],
+           about:"Build and own deployment pipelines for a SaaS platform, and keep releases fast, safe and boring.",
+           doList:["Maintain CI/CD pipelines","Manage containerised deployments","Automate infrastructure and monitoring"],
+           suits:"Experienced engineers with cloud and pipeline experience ready for a product environment.",
+           support:"Cloud track (advanced) with pipeline projects and system-design interview prep."}
+        ];
+
+        var jobList = $("jobList"), activeFilter = "all";
+        var domains = [], locations = [];
+        JOBS.forEach(function(j){ if(domains.indexOf(j.domain)<0) domains.push(j.domain); if(locations.indexOf(j.loc)<0) locations.push(j.loc); });
+        domains.forEach(function(d){ var o=document.createElement("option"); o.value=d; o.textContent=d; $("jobDomain").appendChild(o); });
+        locations.forEach(function(l){ var o=document.createElement("option"); o.value=l; o.textContent=l; $("jobLocation").appendChild(o); });
+
+        function waLink(j){
+          var text = encodeURIComponent("Hi, I'd like to apply for the " + j.title + " opening at " + j.company + " (" + j.loc + "). My name is ");
+          return "https://api.whatsapp.com/send?text=" + text;
+        }
+        function renderJobs(){
+          var q = $("jobSearch").value.trim().toLowerCase();
+          var dom = $("jobDomain").value, loc = $("jobLocation").value;
+          var shown = JOBS.filter(function(j){
+            if(activeFilter==="IT" && j.cat!=="IT") return false;
+            if(activeFilter==="Non-IT" && j.cat!=="Non-IT") return false;
+            if(activeFilter==="Fresher" && j.level!=="Fresher") return false;
+            if(activeFilter==="Experienced" && j.level!=="Experienced") return false;
+            if(dom && j.domain!==dom) return false;
+            if(loc && j.loc!==loc) return false;
+            if(q){ var hay=(j.title+" "+j.company+" "+j.loc+" "+j.skills.join(" ")).toLowerCase(); if(hay.indexOf(q)<0) return false; }
+            return true;
+          });
+          $("jobCount").textContent = shown.length + (shown.length===1 ? " opening" : " openings");
+          $("jobNone").classList.toggle("hidden", shown.length>0);
+          jobList.innerHTML = shown.map(function(j, i){
+            return '<article class="job" data-id="'+j.id+'">'
+              + '<button type="button" class="job-head" aria-expanded="false">'
+              + '<span class="job-num">'+String(i+1).padStart(2,"0")+'</span>'
+              + '<span class="job-title">'+j.title+'</span>'
+              + '<span class="job-chev" aria-hidden="true">+</span>'
+              + '<span class="job-sub">'+j.company+' · '+j.loc+' · '+j.exp+' experience</span>'
+              + '<span class="job-tags"><span class="tagpill">'+j.cat+'</span><span class="tagpill">'+j.level+'</span><span class="tagpill">'+j.domain+'</span>'
+              + j.skills.map(function(s){ return '<span class="tagpill">'+s+'</span>'; }).join("") + '</span>'
+              + '</button>'
+              + '<div class="job-body">'
+              + '<h4>About the role</h4><p>'+j.about+'</p>'
+              + '<h4>What you\'ll do</h4><ul>'+j.doList.map(function(d){ return '<li>'+d+'</li>'; }).join("")+'</ul>'
+              + '<h4>Who it suits</h4><p>'+j.suits+'</p>'
+              + '<h4>Training support available</h4><p>'+j.support+'</p>'
+              + '<div class="job-actions"><button type="button" class="btn btn-accent apply-btn" data-id="'+j.id+'">Apply for this opening</button>'
+              + '<a class="wa-link" href="'+waLink(j)+'" target="_blank" rel="noopener">Apply on WhatsApp</a></div>'
+              + '</div></article>';
+          }).join("");
+          jobList.querySelectorAll(".job-head").forEach(function(h){
+            h.addEventListener("click", function(){
+              var art = h.parentElement, open = art.classList.toggle("open");
+              h.setAttribute("aria-expanded", open ? "true" : "false");
+            });
+          });
+          jobList.querySelectorAll(".apply-btn").forEach(function(b){
+            b.addEventListener("click", function(){
+              var j = JOBS.filter(function(x){ return x.id === +b.getAttribute("data-id"); })[0];
+              if(j){ $("fOpening").value = j.title + " — " + j.company + ", " + j.loc; $("fTarget").value = j.title; }
+              document.getElementById("apply").scrollIntoView({behavior:"smooth"});
+              toast("Opening added to the form below — complete your details to apply.");
+            });
+          });
+        }
+        $("jobSearch").addEventListener("input", renderJobs);
+        $("jobDomain").addEventListener("change", renderJobs);
+        $("jobLocation").addEventListener("change", renderJobs);
+        $("jobTabs").querySelectorAll("button").forEach(function(b){
+          b.addEventListener("click", function(){
+            activeFilter = b.getAttribute("data-f");
+            $("jobTabs").querySelectorAll("button").forEach(function(x){ x.setAttribute("aria-pressed", x===b ? "true" : "false"); });
+            renderJobs();
+          });
+        });
+        renderJobs();
+
+        /* ---------- pathfinder ---------- */
+        var PF = {
+          fromLabels:{support:"IT Support", nonit:"Non-IT / Operations", fresher:"Fresher", sales:"Sales & Customer Service", dev:"Software Development"},
+          toLabels:{data:"Data Analyst", dev:"Software Developer", cloud:"Cloud & DevOps Engineer", testing:"QA Test Engineer", support:"IT Support Engineer"},
+          toDomain:{data:"Data", dev:"Development", cloud:"Cloud & DevOps", testing:"Testing", support:"IT Support"},
+          weeks:{ "support-data":13, "support-dev":16, "support-cloud":12, "support-testing":10, "support-support":6,
+                  "nonit-data":14, "nonit-dev":18, "nonit-cloud":16, "nonit-testing":12, "nonit-support":8,
+                  "fresher-data":12, "fresher-dev":16, "fresher-cloud":14, "fresher-testing":10, "fresher-support":8,
+                  "sales-data":13, "sales-dev":17, "sales-cloud":15, "sales-testing":11, "sales-support":7,
+                  "dev-data":10, "dev-dev":6, "dev-cloud":9, "dev-testing":8, "dev-support":5 }
+        };
+        $("pfGo").addEventListener("click", function(){
+          var from = $("pfFrom").value, to = $("pfTo").value;
+          var w = PF.weeks[from+"-"+to] || 12;
+          var dom = PF.toDomain[to];
+          var matches = JOBS.filter(function(j){ return j.domain===dom; });
+          var roleLinks = matches.length ? matches.map(function(j){
+            return '<a href="#openings" class="pf-role-link" data-domain="'+dom+'">'+j.title+' — '+j.company+', '+j.loc+'</a>';
+          }).join(" · ") : "New openings in this domain are added regularly — apply below and we'll watch for yours.";
+          $("pfResult").innerHTML =
+            '<h3>'+PF.fromLabels[from]+' → '+PF.toLabels[to]+'</h3>'
+            + '<p class="meta">A guided path of about '+w+' weeks, shaped around your current schedule by your counsellor.</p>'
+            + '<ul class="pf-steps"><li>Assess your starting point</li><li>Train for '+PF.toLabels[to]+'</li><li>Build real projects</li><li>Mock interviews</li><li>Interview with top MNCs</li><li>Placed &amp; settled in</li></ul>'
+            + '<p class="pf-roles"><strong>Live openings on this path:</strong> '+roleLinks+'</p>'
+            + '<p style="margin-top:14px"><a class="btn btn-accent" href="#apply" id="pfApply">Start this path — request a callback</a></p>';
+          $("pfResult").classList.remove("hidden");
+          $("pfResult").querySelectorAll(".pf-role-link").forEach(function(a){
+            a.addEventListener("click", function(){
+              $("jobDomain").value = dom; activeFilter = "all";
+              $("jobTabs").querySelectorAll("button").forEach(function(x){ x.setAttribute("aria-pressed", x.getAttribute("data-f")==="all" ? "true" : "false"); });
+              renderJobs();
+            });
+          });
+          var pa = $("pfApply");
+          if(pa){ pa.addEventListener("click", function(){ $("fTarget").value = PF.toLabels[to]; }); }
+          $("pfResult").scrollIntoView({behavior:"smooth", block:"nearest"});
+        });
+
+        /* ---------- FAQ ---------- */
+        var FAQS = [
+          ["Can I change my domain?","Yes — domain change is one of the most common paths we guide. Your counsellor first maps the skills you already have, then builds a training plan that bridges the gap into your target domain, with real projects to prove the new skills."],
+          ["I have no experience — can I apply?","Absolutely. Several openings are marked Fresher, and many of our placed candidates started with no experience at all. What matters is your willingness to complete the training path for your target role."],
+          ["How long does a path usually take?","Most paths run between 8 and 18 weeks, depending on where you're starting from and the role you're aiming for. Use the path finder above for an estimate, and your counsellor will confirm a realistic timeline on your first call."],
+          ["How will I be prepared for interviews?","Through mock interviews with detailed feedback, resume and LinkedIn preparation, and practice on the kinds of questions your target companies actually ask — repeated until you're genuinely ready, not just scheduled."],
+          ["Which companies do you place with?","We place with a range of top MNCs and established product and services companies across IT and non-IT roles. The live openings section shows the current sample of roles; your counsellor will match you to openings that fit your profile."],
+          ["What happens after I apply?","A counsellor calls you within 24 hours to understand your goal. Within about 3 days your personal path and training plan is ready, and from there training begins, with interviews following as you complete each step."],
+          ["I have a career gap — can I still apply?","Yes. A gap is far more common than people think, and it does not close doors by itself. We'll help you present your story honestly and confidently, and build recent project work so employers can see your current skills."],
+          ["I'm currently working — can I prepare alongside my job?","Yes — many of our candidates do exactly that. Your training plan is scheduled around your working hours, and your counsellor adjusts the pace so progress stays steady without disturbing your current role."],
+          ["Can I apply for more than one opening?","You can. Mention the roles you're interested in when you apply, and your counsellor will sequence them sensibly — preparing you for the best-fit opening first while keeping the others warm."],
+          ["What if I'm not selected in my first interview?","Then we debrief honestly, strengthen exactly what the feedback pointed to, and line up the next interview. A first attempt not converting is a normal part of the journey, not the end of it — our support continues until you're placed."],
+          ["How will I know the status of my application?","Your counsellor updates you after every step and every interview round. And in the next step of this website, candidate profiles will let you track your application status yourself, any time."],
+          ["How do I share my resume with you?","Use the resume upload in the application form below — PDF, DOC or DOCX. Your resume is shared only with employers you approve. And if you don't have a ready resume, don't let that stop you: we'll help you build one."]
+        ];
+        $("faqList").innerHTML = FAQS.map(function(f){
+          return '<details><summary>'+f[0]+'<span class="plus" aria-hidden="true">+</span></summary><div class="ans"><p>'+f[1]+'</p></div></details>';
+        }).join("");
+
+        /* ---------- resume upload ---------- */
+        $("fResume").addEventListener("change", function(){
+          var f = this.files && this.files[0];
+          var el = $("resumeName");
+          if(f){ el.textContent = "Selected: " + f.name; el.classList.remove("hidden"); }
+          else { el.classList.add("hidden"); }
+        });
+
+        /* ---------- apply form ---------- */
+        $("applyForm").addEventListener("submit", function(e){
+          e.preventDefault();
+          var name = $("fName").value.trim(), phone = $("fPhone").value.trim();
+          if(!name || !phone){ toast("Please add your name and phone number so your counsellor can call you back."); (!name ? $("fName") : $("fPhone")).focus(); return; }
+          var opening = $("fOpening").value.trim() || "General application";
+          var target = $("fTarget").value.trim() || "To be discussed with your counsellor";
+          var resume = ($("fResume").files && $("fResume").files[0]) ? $("fResume").files[0].name : "Not attached — can be shared later";
+          $("formZone").innerHTML =
+            '<div class="form-success" role="status">'
+            + '<h3>Thank you, '+name.split(" ")[0]+'.</h3>'
+            + '<p>Your details'+(resume.indexOf("Not attached")===0 ? "" : " and resume")+' are with your counsellor, who will call you back within 24 hours.</p>'
+            + '<div class="sum">'
+            + '<div><span>Name</span><strong>'+name+'</strong></div>'
+            + '<div><span>Phone / WhatsApp</span><strong>'+phone+'</strong></div>'
+            + '<div><span>Applying for</span><strong>'+opening+'</strong></div>'
+            + '<div><span>Target role</span><strong>'+target+'</strong></div>'
+            + '<div><span>Resume</span><strong>'+resume+'</strong></div>'
+            + '</div>'
+            + '<p>Next: your counsellor will confirm your path and training plan within about 3 days.</p>'
+            + '<p style="margin-top:14px"><button type="button" class="btn btn-outline" id="againBtn" style="color:var(--forest-text);border-color:var(--forest-muted)">Submit another application</button></p>'
+            + '</div>';
+          $("againBtn").addEventListener("click", function(){ location.reload(); });
+          document.getElementById("apply").scrollIntoView({behavior:"smooth"});
+        });
+
+        /* ---------- candidate modal ---------- */
+        var modal = $("candModal");
+        function openModal(){ modal.classList.add("open"); $("cId").focus(); }
+        function closeModal(){ modal.classList.remove("open"); }
+        $("openCandidate").addEventListener("click", openModal);
+        $("candClose").addEventListener("click", closeModal);
+        modal.addEventListener("click", function(e){ if(e.target===modal) closeModal(); });
+        document.addEventListener("keydown", function(e){ if(e.key==="Escape") closeModal(); });
+        var signup = false;
+        function setCandTab(up){
+          signup = up;
+          $("tabSignIn").setAttribute("aria-pressed", up ? "false" : "true");
+          $("tabSignUp").setAttribute("aria-pressed", up ? "true" : "false");
+          $("candNameField").classList.toggle("hidden", !up);
+          $("candSubmit").textContent = up ? "Create my profile" : "Sign In";
+          $("cPass").setAttribute("autocomplete", up ? "new-password" : "current-password");
+        }
+        $("tabSignIn").addEventListener("click", function(){ setCandTab(false); });
+        $("tabSignUp").addEventListener("click", function(){ setCandTab(true); });
+        $("candForm").addEventListener("submit", function(e){
+          e.preventDefault();
+          $("candNote").classList.remove("hidden");
+          toast("Candidate profiles are coming up — your page is the next step.");
+        });
+
+        /* ---------- dashboard mock ---------- */
+        var STATUSES = ["New","Contacted","In Training","Interviewing","Placed"];
+        var PILL = {"New":"pill-new","Contacted":"pill-contacted","In Training":"pill-training","Interviewing":"pill-interviewing","Placed":"pill-placed"};
+        var APPS = [
+          {name:"Ananya Sharma", sub:"Fresher · Bengaluru", role:"Data Analyst", company:"Analytix Labs", date:"18 Nov 2026", counsellor:"Kavitha Sharma", status:"Interviewing"},
+          {name:"Rahul Menon", sub:"3 yrs · IT Support", role:"Junior Java Developer", company:"CloudNine Technologies", date:"17 Nov 2026", counsellor:"Arun Verma", status:"In Training"},
+          {name:"Priya Kumar", sub:"Fresher · B.Com", role:"IT Support Engineer", company:"Vertex Systems", date:"17 Nov 2026", counsellor:"Kavitha Sharma", status:"Placed"},
+          {name:"Mohammed Faiz", sub:"2 yrs · Cloud Support", role:"Cloud Support Associate", company:"Vertex Systems", date:"16 Nov 2026", counsellor:"Arun Verma", status:"Contacted"},
+          {name:"Sneha Reddy", sub:"Retail · 1 yr", role:"Data Analyst", company:"Analytix Labs", date:"16 Nov 2026", counsellor:"Kavitha Sharma", status:"In Training"},
+          {name:"Vikram Singh", sub:"4 yrs · Testing", role:"QA Test Engineer", company:"NorthPeak Software", date:"15 Nov 2026", counsellor:"Divya Nair", status:"Interviewing"},
+          {name:"Deepa Nair", sub:"Fresher · Any graduate", role:"HR Operations Executive", company:"BrightHire Group", date:"15 Nov 2026", counsellor:"Divya Nair", status:"New"},
+          {name:"Karthik Rao", sub:"5 yrs · DevOps", role:"DevOps Engineer", company:"CloudNine Technologies", date:"14 Nov 2026", counsellor:"Arun Verma", status:"Placed"},
+          {name:"Meera Joshi", sub:"2 yrs · Customer Service", role:"Customer Success Associate", company:"BrightHire Group", date:"14 Nov 2026", counsellor:"Kavitha Sharma", status:"Contacted"},
+          {name:"Arjun Patel", sub:"1 yr · Operations", role:"Business Analyst Trainee", company:"Analytix Labs", date:"13 Nov 2026", counsellor:"Divya Nair", status:"New"}
+        ];
+        var counsellors = [];
+        APPS.forEach(function(a){ if(counsellors.indexOf(a.counsellor)<0) counsellors.push(a.counsellor); });
+        counsellors.forEach(function(c){ var o=document.createElement("option"); o.value=c; o.textContent=c; $("dashCounsellorFilter").appendChild(o); });
+
+        function renderStats(){
+          var counts = {"Total applications": APPS.length};
+          STATUSES.forEach(function(s){ counts[s] = APPS.filter(function(a){ return a.status===s; }).length; });
+          $("dashStats").innerHTML = Object.keys(counts).map(function(k){
+            return '<div class="stat"><div class="num">'+counts[k]+'</div><div class="lab">'+k+'</div></div>';
+          }).join("");
+        }
+        function renderDash(){
+          var q = $("dashSearch").value.trim().toLowerCase();
+          var sf = $("dashStatusFilter").value, cf = $("dashCounsellorFilter").value;
+          var rows = APPS.filter(function(a){
+            if(sf && a.status!==sf) return false;
+            if(cf && a.counsellor!==cf) return false;
+            if(q){ var hay=(a.name+" "+a.role+" "+a.company+" "+a.counsellor).toLowerCase(); if(hay.indexOf(q)<0) return false; }
+            return true;
+          });
+          $("dashNone").classList.toggle("hidden", rows.length>0);
+          $("dashBody").innerHTML = rows.map(function(a){
+            var idx = APPS.indexOf(a);
+            var opts = STATUSES.map(function(s){ return '<option '+(s===a.status?'selected':'')+'>'+s+'</option>'; }).join("");
+            return '<tr>'
+              + '<td data-l="Candidate"><span class="cand-name">'+a.name+'</span><br /><span class="cand-sub">'+a.sub+'</span></td>'
+              + '<td data-l="Applied for"><strong>'+a.role+'</strong><br /><span class="cand-sub">'+a.company+'</span></td>'
+              + '<td data-l="Date">'+a.date+'</td>'
+              + '<td data-l="Resume"><button type="button" class="resume-btn" data-name="'+a.name+'">View resume</button></td>'
+              + '<td data-l="Counsellor">'+a.counsellor+'</td>'
+              + '<td data-l="Status"><select class="status-sel" data-idx="'+idx+'" aria-label="Status for '+a.name+'">'+opts+'</select> <span class="pill '+PILL[a.status]+'">'+a.status+'</span></td>'
+              + '</tr>';
+          }).join("");
+          $("dashBody").querySelectorAll(".status-sel").forEach(function(sel){
+            sel.addEventListener("change", function(){
+              var a = APPS[+sel.getAttribute("data-idx")];
+              a.status = sel.value; renderStats(); renderDash();
+              toast(a.name + " moved to “" + sel.value + "” (this session only).");
+            });
+          });
+          $("dashBody").querySelectorAll(".resume-btn").forEach(function(b){
+            b.addEventListener("click", function(){ toast("Sample only — " + b.getAttribute("data-name") + "'s resume would open here in the real dashboard."); });
+          });
+        }
+        $("dashSearch").addEventListener("input", renderDash);
+        $("dashStatusFilter").addEventListener("change", renderDash);
+        $("dashCounsellorFilter").addEventListener("change", renderDash);
+        renderStats(); renderDash();
+
+        /* ---------- scroll reveal ---------- */
+        if("IntersectionObserver" in window){
+          var io = new IntersectionObserver(function(entries){
+            entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target); } });
+          }, {threshold:.12});
+          document.querySelectorAll(".reveal").forEach(function(el){ io.observe(el); });
+        } else {
+          document.querySelectorAll(".reveal").forEach(function(el){ el.classList.add("in"); });
+        }
+      })();
+    </script>
+  </body>
+</html>
