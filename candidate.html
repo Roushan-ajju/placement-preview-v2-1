@@ -1,0 +1,1664 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="light dark" />
+<link rel="icon" href="data:," />
+<title>Candidate Profile — Your Journey &amp; Tracker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --paper:#FAF6EF;
+    --paper-2:#F3ECDD;
+    --card:#FFFDF8;
+    --ink:#29201A;
+    --ink-soft:#5C4F45;
+    --ink-faint:#8A7B6E;
+    --rule:#E3D8C6;
+    --accent:#E85D26;
+    --accent-deep:#C44A1B;
+    --accent-soft:#FBE9DE;
+    --forest:#1E4D2B;
+    --forest-deep:#173B21;
+    --forest-text:#F5EFE0;
+    --gold:#C9A962;
+    --good:#2E7D46;
+    --seal:#E85D26;
+    --shadow:0 1px 2px rgba(41,32,26,.05),0 10px 30px -18px rgba(41,32,26,.25);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --paper:#211A14;
+      --paper-2:#2A211A;
+      --card:#2C231B;
+      --ink:#F2E9DA;
+      --ink-soft:#CDBFA9;
+      --ink-faint:#9C8B76;
+      --rule:#453729;
+      --accent:#F0713C;
+      --accent-deep:#F0713C;
+      --accent-soft:#3D2A1E;
+      --forest:#1E4D2B;
+      --forest-deep:#173B21;
+      --forest-text:#F5EFE0;
+      --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px -18px rgba(0,0,0,.6);
+    }
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} *{animation:none!important;transition:none!important} }
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+    font-size:16px;line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  button,[role="button"],select,summary,input:not([type="checkbox"],[type="radio"]){min-height:2.25rem}
+  a{color:var(--accent-deep)}
+  .serif{font-family:"Fraunces",Georgia,serif}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+
+  /* ---------- header ---------- */
+  header.topbar{
+    position:sticky;top:0;z-index:40;background:var(--paper);
+    border-bottom:1px solid var(--rule);
+  }
+  .topbar-in{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0}
+  .wordmark{font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:1.15rem;letter-spacing:.01em}
+  .wordmark em{font-style:italic;color:var(--accent-deep)}
+  .who{display:flex;align-items:center;gap:10px}
+  .avatar{
+    width:38px;height:38px;border-radius:50%;flex:none;
+    background:var(--forest);color:var(--forest-text);
+    display:flex;align-items:center;justify-content:center;
+    font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:.95rem;position:relative;
+  }
+  .seal-dot{
+    position:absolute;top:-2px;right:-2px;width:13px;height:13px;border-radius:50%;
+    background:var(--seal);border:2px solid var(--paper);
+  }
+  .seal-dot.broken{animation:sealBreak .5s ease forwards}
+  @keyframes sealBreak{to{transform:scale(0);opacity:0}}
+  .who-name{font-size:.9rem;font-weight:600;line-height:1.2}
+  .who-sub{font-size:.75rem;color:var(--ink-faint)}
+  .sample-tag{
+    font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+    border:1px solid var(--accent);color:var(--accent-deep);
+    padding:3px 8px;border-radius:999px;white-space:nowrap;
+  }
+
+  /* ---------- layout ---------- */
+  .layout{display:grid;grid-template-columns:1fr;gap:0;padding-bottom:64px}
+  @media (min-width:960px){
+    .layout{grid-template-columns:minmax(0,1fr) 320px;gap:44px;align-items:start}
+    .rail{position:sticky;top:76px}
+    .rail .next-thing{margin-top:26px}
+  }
+  @media (max-width:959px){ .rail{display:contents} .rail-only{display:none!important} }
+  @media (min-width:960px){ .mobile-only{display:none!important} }
+
+  /* ---------- greeting ---------- */
+  .greeting{padding:34px 0 6px}
+  .greeting h1{
+    font-family:"Fraunces",Georgia,serif;font-weight:500;
+    font-size:clamp(2rem,6vw,3.1rem);line-height:1.08;margin:0 0 10px;color:var(--forest);
+  }
+  @media (prefers-color-scheme: dark){ .greeting h1{color:#A9CBAF} }
+  .greeting h1 .name{font-style:italic}
+  .greeting p.lede{font-size:1.06rem;color:var(--ink-soft);margin:0;max-width:34em}
+  .greeting p.lede strong{color:var(--ink)}
+  .squiggle{display:block;margin-top:14px}
+
+  .counsellor-strip{
+    display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+    margin-top:22px;padding:14px 16px;background:var(--card);
+    border:1px solid var(--rule);border-radius:14px;box-shadow:var(--shadow);
+  }
+  .c-avatar{
+    width:48px;height:48px;border-radius:50%;flex:none;background:var(--accent-soft);
+    color:var(--accent-deep);display:flex;align-items:center;justify-content:center;
+    font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:1.05rem;
+  }
+  .counsellor-strip .c-meta{flex:1;min-width:180px}
+  .counsellor-strip .c-meta b{display:block;font-size:.98rem}
+  .counsellor-strip .c-meta span{font-size:.83rem;color:var(--ink-faint)}
+  .c-actions{display:flex;gap:8px;flex-wrap:wrap}
+  .btn{
+    appearance:none;border:1px solid var(--rule);background:var(--card);color:var(--ink);
+    font:inherit;font-size:.9rem;font-weight:600;padding:9px 16px;border-radius:999px;
+    cursor:pointer;display:inline-flex;align-items:center;gap:8px;text-decoration:none;
+    transition:transform .15s ease,background .15s ease,border-color .15s ease;
+  }
+  .btn:hover{border-color:var(--ink-faint)}
+  .btn:active{transform:scale(.98)}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:#FFF7EF}
+  .btn.primary:hover{background:var(--accent-deep)}
+  .btn.forest{background:var(--forest);border-color:var(--forest);color:var(--forest-text)}
+  .btn.small{font-size:.83rem;padding:7px 13px}
+  .btn svg{width:16px;height:16px;flex:none}
+
+  /* ---------- next thing ---------- */
+  .next-thing{
+    margin-top:26px;background:var(--card);border:1px solid var(--rule);
+    border-left:5px solid var(--accent);border-radius:6px 14px 14px 6px;
+    padding:20px 22px;box-shadow:var(--shadow);
+  }
+  .next-thing .nt-kicker{
+    font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-deep);
+    display:flex;align-items:center;gap:8px;margin-bottom:8px;
+  }
+  .next-thing h2{font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:1.35rem;margin:0 0 6px;line-height:1.25}
+  .next-thing p{margin:0 0 16px;color:var(--ink-soft);font-size:.95rem}
+  .next-thing .nt-actions{display:flex;gap:8px;flex-wrap:wrap}
+  .next-thing.done{border-left-color:var(--forest)}
+  .receipt-stamp{
+    display:inline-flex;align-items:center;gap:8px;font-weight:700;color:var(--forest);
+    font-size:.95rem;
+  }
+  @media (prefers-color-scheme: dark){ .receipt-stamp{color:#A9CBAF} }
+
+  /* ---------- chapters ---------- */
+  section.chapter{margin-top:52px}
+  .chapter-head{display:flex;align-items:baseline;gap:14px;margin-bottom:6px}
+  .chapter-num{
+    font-family:"Fraunces",Georgia,serif;font-style:italic;color:var(--accent-deep);
+    font-size:1rem;flex:none;
+  }
+  .chapter-head h2{
+    font-family:"Fraunces",Georgia,serif;font-weight:600;
+    font-size:clamp(1.5rem,4vw,2rem);margin:0;line-height:1.15;
+  }
+  .chapter-sub{color:var(--ink-soft);margin:4px 0 20px;max-width:38em;font-size:.97rem}
+  .meta-line{font-size:.85rem;color:var(--ink-faint);margin-top:14px}
+  .meta-line b{color:var(--ink-soft);font-weight:600}
+
+  /* ---------- journey tracker ---------- */
+  .thread{position:relative;margin-left:10px;padding-left:34px}
+  .thread::before{
+    content:"";position:absolute;left:9px;top:14px;bottom:14px;width:3px;border-radius:3px;
+    background:linear-gradient(var(--accent),var(--accent)) left top/100% var(--thread-fill,58%) no-repeat,var(--rule);
+  }
+  .step{position:relative;padding:0 0 26px}
+  .step:last-child{padding-bottom:4px}
+  .step .node{
+    position:absolute;left:-34px;top:2px;width:21px;height:21px;border-radius:50%;
+    background:var(--paper);border:2.5px solid var(--rule);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .step.done .node{background:var(--forest);border-color:var(--forest);color:#fff}
+  .step.done .node svg{width:11px;height:11px}
+  .step.ongoing .node{
+    border-color:var(--forest);
+    background:linear-gradient(90deg,var(--forest) 50%,var(--paper) 50%);
+  }
+  .ongoing-pill{
+    font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--forest);border:1px solid var(--forest);border-radius:999px;padding:2px 9px;
+  }
+  @media (prefers-color-scheme: dark){ .ongoing-pill{color:#A9CBAF;border-color:#A9CBAF} }
+  .step.current .node{
+    background:var(--accent);border-color:var(--accent);
+    box-shadow:0 0 0 5px var(--accent-soft);
+  }
+  .step.current .node::after{content:"";width:7px;height:7px;border-radius:50%;background:#FFF7EF}
+  .step .step-top{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .step h3{font-size:1.02rem;margin:0;font-weight:600}
+  .step.done h3{color:var(--ink-soft)}
+  .step.future h3{color:var(--ink-faint);font-weight:500}
+  .step.current h3{
+    font-family:"Fraunces",Georgia,serif;font-size:1.3rem;font-weight:600;color:var(--ink);
+  }
+  .stamp{
+    font-size:.68rem;font-weight:700;letter-spacing:.05em;color:var(--forest);
+    border:1.6px solid var(--forest);border-radius:50%;width:44px;height:44px;flex:none;
+    display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.1;
+    transform:rotate(-9deg);opacity:.9;padding:3px;
+  }
+  @media (prefers-color-scheme: dark){ .stamp{color:#A9CBAF;border-color:#A9CBAF} }
+  .stamp.pop{animation:stampIn .45s cubic-bezier(.2,1.4,.4,1) both}
+  @keyframes stampIn{from{transform:rotate(-9deg) scale(1.7);opacity:0}to{transform:rotate(-9deg) scale(1);opacity:.9}}
+  .step p{margin:4px 0 0;color:var(--ink-soft);font-size:.93rem;max-width:36em}
+  .step.future p{color:var(--ink-faint)}
+  .step .step-date{font-size:.8rem;color:var(--ink-faint);margin-top:3px}
+  .step .step-action{margin-top:10px}
+  .branch-note{
+    margin:6px 0 26px;padding:14px 16px;border:1px dashed var(--ink-faint);border-radius:12px;
+    color:var(--ink-soft);font-size:.92rem;background:var(--paper-2);
+  }
+  .branch-note b{color:var(--ink)}
+
+  /* ---------- interview card ---------- */
+  .interview-card{
+    margin-top:8px;background:var(--forest);color:var(--forest-text);
+    border-radius:16px;padding:24px 24px 20px;box-shadow:var(--shadow);
+  }
+  .interview-card .ic-kicker{
+    font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);
+    margin-bottom:8px;
+  }
+  .interview-card h3{font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:1.45rem;margin:0 0 4px;line-height:1.25}
+  .interview-card .ic-when{font-size:1rem;margin:0 0 2px}
+  .interview-card .ic-meta{font-size:.88rem;opacity:.85;margin:0}
+  .interview-card .prep{margin:16px 0 0;padding:14px 0 0;border-top:1px solid rgba(245,239,224,.25)}
+  .interview-card .prep b{font-size:.85rem;letter-spacing:.04em}
+  .interview-card ul{margin:8px 0 0;padding-left:18px;font-size:.93rem}
+  .interview-card li{margin:3px 0}
+  .interview-card .ic-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+  .interview-card .btn{background:transparent;border-color:rgba(245,239,224,.5);color:var(--forest-text)}
+  .interview-card .btn:hover{border-color:var(--forest-text)}
+  .interview-card .btn.primary{background:var(--gold);border-color:var(--gold);color:#2A2110}
+  .confirmed-note{display:none;margin-top:14px;font-size:.9rem;font-weight:600}
+  .confirmed-note.show{display:block}
+
+  /* ---------- updates feed ---------- */
+  .feed{list-style:none;margin:0;padding:0}
+  .feed-group{font-size:.72rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-faint);margin:22px 0 10px}
+  .feed-group:first-child{margin-top:4px}
+  .feed-item{
+    display:flex;gap:14px;padding:15px 16px;background:var(--card);
+    border:1px solid var(--rule);border-radius:12px;margin-bottom:10px;box-shadow:var(--shadow);
+    cursor:pointer;text-align:left;width:100%;font:inherit;color:inherit;
+  }
+  .feed-item .f-seal{
+    width:11px;height:11px;border-radius:50%;background:var(--seal);flex:none;margin-top:6px;
+    transition:transform .4s ease,opacity .4s ease;
+  }
+  .feed-item.read .f-seal{background:var(--rule)}
+  .feed-item.seal-broken .f-seal{transform:scale(0);opacity:0}
+  .feed-item .f-body{flex:1;min-width:0}
+  .feed-item .f-actor{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint)}
+  .feed-item h3{font-family:"Fraunces",Georgia,serif;font-size:1.08rem;font-weight:600;margin:2px 0 3px}
+  .feed-item.unread h3{font-weight:700}
+  .feed-item p{margin:0;font-size:.92rem;color:var(--ink-soft)}
+  .feed-item .f-time{font-size:.78rem;color:var(--ink-faint);margin-top:5px}
+  .feed-item .f-action{margin-top:9px}
+  .feed-more{display:none}
+  .feed-more.open{display:block}
+
+  /* ---------- training (forest chapter) ---------- */
+  .training{
+    background:var(--forest);color:var(--forest-text);border-radius:18px;
+    padding:28px 24px;box-shadow:var(--shadow);
+  }
+  .training .t-kicker{font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+  .training h3{font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:1.5rem;margin:0 0 4px;line-height:1.25}
+  .training .t-sub{opacity:.88;font-size:.94rem;margin:0}
+  .progress-words{display:flex;align-items:center;gap:12px;margin:20px 0 6px;font-size:.9rem;font-weight:600}
+  .progress-rule{flex:1;height:5px;border-radius:5px;background:rgba(245,239,224,.25);overflow:hidden}
+  .progress-rule i{display:block;height:100%;width:44%;background:var(--gold);border-radius:5px}
+  .now-module{
+    background:rgba(245,239,224,.08);border:1px solid rgba(245,239,224,.3);
+    border-radius:12px;padding:16px 18px;margin-top:16px;
+  }
+  .now-module .nm-tag{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
+  .now-module h4{font-family:"Fraunces",Georgia,serif;font-size:1.2rem;margin:5px 0 3px;font-weight:600}
+  .now-module p{margin:0;font-size:.92rem;opacity:.9}
+  .now-module .nm-session{margin-top:10px;font-size:.9rem}
+  .now-module .btn{margin-top:12px;background:var(--gold);border-color:var(--gold);color:#2A2110}
+  .module-lists{display:grid;grid-template-columns:1fr;gap:18px;margin-top:20px}
+  @media (min-width:640px){ .module-lists{grid-template-columns:1fr 1fr} }
+  .module-lists h5{font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin:0 0 8px;opacity:.85}
+  .module-lists ul{list-style:none;margin:0;padding:0;font-size:.92rem}
+  .module-lists li{padding:6px 0;border-bottom:1px solid rgba(245,239,224,.15);display:flex;justify-content:space-between;gap:10px}
+  .module-lists li:last-child{border-bottom:none}
+  .module-lists .m-date{opacity:.7;font-size:.8rem;white-space:nowrap}
+  .module-lists .upcoming li{opacity:.65}
+  .mock-box{margin-top:20px;border-top:1px solid rgba(245,239,224,.25);padding-top:16px}
+  .mock-box h5{font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin:0 0 8px;color:var(--gold)}
+  .mock-box .readiness{
+    display:inline-block;font-family:"Fraunces",Georgia,serif;font-style:italic;font-size:1.15rem;
+    border:1px solid var(--gold);color:var(--gold);border-radius:999px;padding:2px 14px;margin-bottom:10px;
+  }
+  .mock-box p{margin:4px 0;font-size:.93rem}
+  .mock-box .earlier{font-size:.85rem;opacity:.75;margin-top:10px}
+
+  /* ---------- other applications ---------- */
+  .app-row{
+    display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+    padding:15px 16px;background:var(--card);border:1px solid var(--rule);
+    border-radius:12px;margin-bottom:10px;box-shadow:var(--shadow);
+  }
+  .app-row .a-main{flex:1;min-width:200px}
+  .app-row .a-main b{display:block;font-size:.98rem}
+  .app-row .a-main span{font-size:.85rem;color:var(--ink-faint)}
+  .pill{
+    font-size:.75rem;font-weight:700;padding:5px 12px;border-radius:999px;white-space:nowrap;
+  }
+  .pill.hold{background:var(--paper-2);color:var(--ink-soft);border:1px dashed var(--ink-faint)}
+  .pill.closed{background:var(--paper-2);color:var(--ink-faint)}
+  details.finished{margin-top:6px}
+  details.finished summary{cursor:pointer;font-weight:600;font-size:.92rem;color:var(--ink-soft);padding:10px 2px}
+  details.finished .app-row{box-shadow:none}
+
+  /* ---------- jobs ---------- */
+  .job-row{
+    padding:18px;border:1px solid var(--rule);border-radius:12px;background:var(--card);
+    margin-bottom:12px;box-shadow:var(--shadow);
+  }
+  .job-row .j-top{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  .job-row h3{font-family:"Fraunces",Georgia,serif;font-size:1.2rem;font-weight:600;margin:0}
+  .job-row .j-co{font-weight:600;font-size:.92rem;color:var(--ink-soft)}
+  .job-row .j-meta{font-size:.86rem;color:var(--ink-faint);margin-top:2px}
+  .job-row .j-why{font-size:.93rem;color:var(--ink-soft);margin:9px 0 0;font-style:italic;font-family:"Fraunces",Georgia,serif}
+  .job-row .j-actions{display:flex;gap:8px;margin-top:13px;flex-wrap:wrap}
+  .job-row.saved{border-color:var(--forest)}
+  .job-row .saved-note{display:none;font-size:.85rem;font-weight:600;color:var(--forest)}
+  @media (prefers-color-scheme: dark){ .job-row .saved-note{color:#A9CBAF} }
+  .job-row.saved .saved-note{display:inline}
+
+  /* ---------- profile & resume ---------- */
+  .completeness{margin-bottom:20px}
+  .completeness .c-top{display:flex;justify-content:space-between;align-items:baseline;font-size:.92rem}
+  .completeness .c-top b{font-family:"Fraunces",Georgia,serif;font-size:1.05rem}
+  .c-rule{height:5px;border-radius:5px;background:var(--rule);margin:8px 0 10px;overflow:hidden}
+  .c-rule i{display:block;height:100%;width:82%;background:var(--accent);border-radius:5px}
+  .next-missing{
+    width:100%;text-align:left;background:var(--accent-soft);border:1px solid transparent;
+    border-radius:10px;padding:11px 14px;font:inherit;font-size:.92rem;font-weight:600;
+    color:var(--accent-deep);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:10px;
+  }
+  .checklist{display:none;margin:12px 0 0;padding:0;list-style:none}
+  .checklist.open{display:block}
+  .checklist li{padding:8px 2px;border-bottom:1px solid var(--rule);font-size:.93rem;display:flex;gap:10px;align-items:baseline}
+  .checklist li:last-child{border-bottom:none}
+  .checklist .tick{color:var(--good);font-weight:700}
+  .checklist .todo{color:var(--accent-deep);font-weight:700}
+  .checklist .why{font-size:.85rem;color:var(--ink-faint);margin-top:10px}
+
+  .resume-card{
+    border:1px solid var(--rule);border-radius:12px;background:var(--card);
+    padding:18px;box-shadow:var(--shadow);margin-bottom:14px;
+  }
+  .resume-card .r-top{display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap}
+  .file-badge{
+    width:46px;height:54px;flex:none;border:1.6px solid var(--accent);border-radius:6px;
+    color:var(--accent-deep);display:flex;align-items:center;justify-content:center;
+    font-size:.62rem;font-weight:800;letter-spacing:.05em;background:var(--accent-soft);
+  }
+  .resume-card .r-meta{flex:1;min-width:200px}
+  .resume-card .r-meta b{display:block;font-size:.97rem;word-break:break-all}
+  .resume-card .r-meta span{font-size:.83rem;color:var(--ink-faint)}
+  .share-log{margin-top:14px;border-top:1px solid var(--rule);padding-top:12px}
+  .share-log h5{margin:0 0 6px;font-size:.75rem;font-weight:700;letter-spacing:.11em;text-transform:uppercase;color:var(--ink-faint)}
+  .share-log p{margin:4px 0;font-size:.9rem;color:var(--ink-soft)}
+  .share-log p b{color:var(--ink)}
+  .privacy-line{font-size:.85rem;color:var(--ink-soft);margin-top:10px;display:flex;gap:8px;align-items:flex-start}
+  .privacy-line svg{width:15px;height:15px;flex:none;margin-top:2px;color:var(--forest)}
+  @media (prefers-color-scheme: dark){ .privacy-line svg{color:#A9CBAF} }
+
+  details.profile-edit{border:1px solid var(--rule);border-radius:12px;background:var(--card);box-shadow:var(--shadow)}
+  details.profile-edit summary{cursor:pointer;padding:15px 18px;font-weight:600;font-size:.97rem}
+  .profile-grid{display:grid;grid-template-columns:1fr;gap:0;padding:0 18px 8px}
+  @media (min-width:640px){ .profile-grid{grid-template-columns:1fr 1fr;column-gap:28px} }
+  .profile-grid .pg-row{padding:10px 0;border-bottom:1px solid var(--rule)}
+  .profile-grid .pg-row dt{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint)}
+  .profile-grid .pg-row dd{margin:3px 0 0;font-size:.95rem}
+  dl.profile-grid{margin:0}
+
+  /* ---------- editable details, verified contacts, choices ---------- */
+  .panel{
+    border:1px solid var(--rule);border-radius:12px;background:var(--card);
+    padding:20px;box-shadow:var(--shadow);margin-bottom:14px;
+  }
+  .panel h3{font-family:"Fraunces",Georgia,serif;font-size:1.22rem;font-weight:600;margin:0 0 6px}
+  .panel .panel-sub{font-size:.92rem;color:var(--ink-soft);margin:0 0 16px}
+  .form-grid{display:grid;grid-template-columns:1fr;gap:14px 18px}
+  @media (min-width:640px){ .form-grid{grid-template-columns:1fr 1fr} .form-grid .wide{grid-column:1/-1} }
+  .field label{display:block;font-size:.74rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:5px}
+  .field input,.field select,.field textarea{
+    width:100%;font:inherit;font-size:.95rem;color:var(--ink);
+    background:var(--paper);border:1px solid var(--rule);border-radius:9px;padding:9px 12px;
+  }
+  .field textarea{min-height:84px;resize:vertical}
+  .field input:focus,.field select:focus,.field textarea:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:var(--accent)}
+  .field .hint{font-size:.8rem;color:var(--ink-faint);margin-top:4px}
+  .form-section-title{
+    font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--accent-deep);margin:20px 0 2px;
+  }
+  .form-section-title:first-child{margin-top:0}
+  .save-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:18px}
+  .save-state{font-size:.88rem;font-weight:600;color:var(--forest)}
+  @media (prefers-color-scheme: dark){ .save-state{color:#A9CBAF} }
+  .save-state.saving{color:var(--accent-deep)}
+
+  .contact-row{
+    display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+    padding:13px 0;border-bottom:1px solid var(--rule);
+  }
+  .contact-row:last-of-type{border-bottom:none}
+  .contact-row .ct-main{flex:1;min-width:210px}
+  .contact-row .ct-main span{display:block;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint)}
+  .contact-row .ct-main b{font-size:1rem}
+  .verified-pill{font-size:.72rem;font-weight:700;color:var(--forest);border:1px solid var(--forest);border-radius:999px;padding:3px 10px;white-space:nowrap}
+  @media (prefers-color-scheme: dark){ .verified-pill{color:#A9CBAF;border-color:#A9CBAF} }
+  .current-tag{font-size:.72rem;font-weight:700;color:var(--ink-faint);letter-spacing:.06em;text-transform:uppercase}
+  .request-card{
+    border:1px dashed var(--accent);background:var(--accent-soft);border-radius:12px;
+    padding:15px 16px;margin-top:14px;
+  }
+  .request-card .rq-top{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .request-card h4{font-family:"Fraunces",Georgia,serif;font-size:1.05rem;margin:0;font-weight:600}
+  .pending-pill{font-size:.72rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;background:var(--accent);color:#FFF7EF;border-radius:999px;padding:4px 11px}
+  .request-card p{margin:7px 0 0;font-size:.9rem;color:var(--ink-soft)}
+  .request-card p b{color:var(--ink)}
+  .lifecycle{font-size:.88rem;color:var(--ink-soft);margin-top:14px;border-top:1px solid var(--rule);padding-top:12px}
+  #changeRequestForm{display:none;margin-top:16px;border-top:1px solid var(--rule);padding-top:16px}
+  #changeRequestForm.open{display:block}
+  .form-error{display:none;font-size:.88rem;font-weight:600;color:var(--accent-deep);margin-top:10px}
+  .form-error.show{display:block}
+  .form-ok{display:none;font-size:.9rem;font-weight:600;color:var(--forest);margin-top:12px}
+  @media (prefers-color-scheme: dark){ .form-ok{color:#A9CBAF} }
+  .form-ok.show{display:block}
+
+  .chip-row{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 4px}
+  .chip{
+    appearance:none;font:inherit;font-size:.88rem;font-weight:600;cursor:pointer;
+    border:1px solid var(--rule);background:var(--paper);color:var(--ink-soft);
+    border-radius:999px;padding:8px 15px;min-height:2.25rem;
+  }
+  .chip[aria-pressed="true"]{background:var(--forest);border-color:var(--forest);color:var(--forest-text)}
+  .choice-label{font-size:.74rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-faint);margin:16px 0 2px}
+  .choice-label:first-child{margin-top:0}
+  .mode-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+  .mode-row label{
+    display:inline-flex;align-items:center;gap:8px;cursor:pointer;min-height:2.25rem;
+    border:1px solid var(--rule);border-radius:999px;padding:8px 15px;font-size:.9rem;font-weight:600;color:var(--ink-soft);background:var(--paper);
+  }
+  .mode-row label:has(input:checked){background:var(--forest);border-color:var(--forest);color:var(--forest-text)}
+  .mode-row input{accent-color:var(--accent);width:16px;height:16px;min-height:0}
+  .notif-grid{display:grid;grid-template-columns:1fr;gap:0}
+  .notif-head,.notif-row{display:grid;grid-template-columns:minmax(120px,1.2fr) repeat(3,1fr);gap:8px;align-items:center;padding:10px 0;border-bottom:1px solid var(--rule)}
+  .notif-head{font-size:.7rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-faint);padding-top:2px}
+  .notif-row:last-child{border-bottom:none}
+  .notif-row .n-cat{font-weight:600;font-size:.93rem}
+  @media (max-width:560px){
+    .notif-head{display:none}
+    .notif-row{grid-template-columns:repeat(3,1fr);gap:6px}
+    .notif-row .n-cat{grid-column:1/-1;font-size:.92rem}
+    .notif-row .n-cat span{font-size:.78rem}
+    .switch{font-size:.75rem;gap:5px;flex-wrap:wrap}
+    .switch::before{content:attr(data-ch);flex-basis:100%;font-size:.68rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-faint)}
+    .switch .track{width:38px;height:22px}
+    .switch .track::after{width:16px;height:16px}
+    .switch input:checked + .track::after{left:19px}
+  }
+  .notif-row .n-cat span{display:block;font-weight:400;font-size:.8rem;color:var(--ink-faint)}
+  .switch{position:relative;display:inline-flex;align-items:center;gap:7px;cursor:pointer;min-height:2.25rem;font-size:.82rem;color:var(--ink-soft)}
+  .switch input{position:absolute;opacity:0;width:1px;height:1px;min-height:0}
+  .switch .track{width:42px;height:24px;border-radius:999px;background:var(--rule);flex:none;position:relative;transition:background .2s ease}
+  .switch .track::after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:var(--card);box-shadow:0 1px 3px rgba(0,0,0,.25);transition:left .2s ease}
+  .switch input:checked + .track{background:var(--forest)}
+  .switch input:checked + .track::after{left:21px}
+  .switch input:focus-visible + .track{outline:2px solid var(--accent);outline-offset:2px}
+  .blocked-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+  .blocked-item{display:inline-flex;align-items:center;gap:8px;border:1px dashed var(--ink-faint);border-radius:999px;padding:6px 8px 6px 13px;font-size:.87rem;font-weight:600}
+  .blocked-item button{appearance:none;border:none;background:transparent;font:inherit;cursor:pointer;color:var(--accent-deep);font-weight:700;min-height:2rem;padding:0 6px}
+  .refresh-note{font-size:.86rem;color:var(--ink-faint);margin:-8px 0 16px}
+  .refresh-note b{color:var(--accent-deep)}
+  .job-row.applied{border-color:var(--accent)}
+  .applied-note{display:none;font-size:.85rem;font-weight:700;color:var(--accent-deep)}
+  .job-row.applied .applied-note{display:inline}
+
+  /* ---------- refer a friend ---------- */
+  .refer-layout{display:grid;grid-template-columns:1fr;gap:14px}
+  @media (min-width:820px){ .refer-layout{grid-template-columns:.92fr 1.08fr;align-items:start} }
+  .referral-card{border:1px solid var(--rule);border-radius:12px;background:var(--paper);padding:16px;margin-bottom:12px}
+  .referral-card:last-child{margin-bottom:0}
+  .referral-card .rf-top{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:baseline}
+  .referral-card .rf-top b{font-family:"Fraunces",Georgia,serif;font-size:1.08rem}
+  .referral-card .rf-meta{font-size:.84rem;color:var(--ink-faint)}
+  ol.ref-track{list-style:none;display:grid;grid-template-columns:repeat(5,1fr);margin:16px 0 2px;padding:0;position:relative}
+  ol.ref-track::before{content:"";position:absolute;top:6px;left:10%;right:10%;height:2px;background:var(--rule)}
+  ol.ref-track li{position:relative;text-align:center;padding-top:18px;font-size:.68rem;font-weight:600;color:var(--ink-faint);line-height:1.25}
+  ol.ref-track li::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:13px;height:13px;border-radius:50%;background:var(--paper);border:2.5px solid var(--rule);z-index:1}
+  ol.ref-track li.done{color:var(--ink-soft)}
+  ol.ref-track li.done::before{background:var(--forest);border-color:var(--forest)}
+  ol.ref-track li.current{color:var(--accent-deep);font-weight:800}
+  ol.ref-track li.current::before{background:var(--accent);border-color:var(--accent);box-shadow:0 0 0 4px var(--accent-soft)}
+  ol.ref-track li .rf-date{display:block;font-weight:400;font-size:.64rem;margin-top:2px}
+  ol.ref-track li.placed-all{color:var(--forest)}
+
+  /* ---------- privacy & foot ---------- */
+  .privacy-block{
+    margin-top:44px;border-top:2px solid var(--ink);padding-top:20px;
+    font-size:.88rem;color:var(--ink-soft);
+  }
+  .privacy-block h3{font-family:"Fraunces",Georgia,serif;font-size:1.1rem;margin:0 0 8px;color:var(--ink)}
+  .privacy-block ul{margin:8px 0;padding-left:18px}
+  .privacy-block li{margin:4px 0}
+  footer.site-foot{
+    margin-top:36px;padding:26px 0 10px;border-top:1px solid var(--rule);
+    font-size:.83rem;color:var(--ink-faint);
+  }
+  footer.site-foot .big{
+    font-family:"Fraunces",Georgia,serif;font-size:clamp(1.8rem,6vw,2.8rem);
+    color:var(--ink);font-weight:500;line-height:1.1;margin-bottom:12px;
+  }
+  footer.site-foot .big em{font-style:italic;color:var(--accent-deep)}
+
+  .toast{
+    position:fixed;left:50%;bottom:22px;transform:translate(-50%,80px);z-index:60;
+    background:var(--ink);color:var(--paper);padding:12px 20px;border-radius:999px;
+    font-size:.9rem;font-weight:600;box-shadow:var(--shadow);opacity:0;
+    transition:transform .3s ease,opacity .3s ease;max-width:calc(100vw - 32px);text-align:center;
+  }
+  .toast.show{transform:translate(-50%,0);opacity:1}
+  .hidden-file{position:absolute;width:1px;height:1px;overflow:hidden;opacity:0}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <div class="wordmark">Placement <em>Stories</em></div>
+    <span class="sample-tag">Draft sample</span>
+    <div class="who">
+      <div>
+        <div class="who-name">Priya Sharma</div>
+        <div class="who-sub">Candidate profile</div>
+      </div>
+      <div class="avatar" aria-label="Priya Sharma, 2 unread updates">PS<span class="seal-dot" id="headerSeal"></span></div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap layout">
+  <main>
+    <!-- 1 · Greeting -->
+    <div class="greeting">
+      <h1>Good morning, <span class="name">Priya.</span></h1>
+      <p class="lede">You&rsquo;re in the process for <strong>Data Analyst at Northgate Systems</strong> — and your interview is confirmed. Everything about your journey lives on this one page.</p>
+      <svg class="squiggle" width="150" height="10" viewBox="0 0 150 10" fill="none" aria-hidden="true"><path d="M2 6 C 22 1, 40 9, 60 5 S 105 1, 148 5" stroke="#E85D26" stroke-width="2.4" stroke-linecap="round"/></svg>
+
+      <div class="counsellor-strip">
+        <div class="c-avatar" aria-hidden="true">AR</div>
+        <div class="c-meta">
+          <b>Your counsellor, Ananya Rao</b>
+          <span>With you since 28 Oct · Available Mon–Sat, 10am–6pm</span>
+        </div>
+        <div class="c-actions">
+          <a class="btn small" href="https://wa.me/" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            WhatsApp
+          </a>
+          <a class="btn small" href="tel:+910000000000">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            Call
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2 · Your next thing (mobile position: directly under the greeting) -->
+    <div class="next-thing mobile-only js-next-thing">
+      <div class="nt-kicker">Your next thing · One only</div>
+      <div class="js-next-live">
+        <h2>Confirm your interview</h2>
+        <p>Your first conversation with Northgate&rsquo;s hiring manager is <b>Wednesday 25 Nov, 11:00 am</b>. Confirm you can make it, then read Ananya&rsquo;s preparation notes in the interview card.</p>
+        <div class="nt-actions">
+          <button class="btn primary js-confirm" type="button">Confirm attendance</button>
+          <a class="btn" href="#interview">See the card</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3 · Journey tracker -->
+    <section class="chapter" id="journey" aria-labelledby="journey-h">
+      <div class="chapter-head"><span class="chapter-num">Chapter 01</span><h2 id="journey-h">Your journey to Northgate Systems</h2></div>
+      <p class="chapter-sub">Data Analyst · Bengaluru · Hybrid. One step at a time — completed steps are stamped, and the road ahead is always named, never hidden.</p>
+
+      <div class="thread" id="thread">
+        <div class="step done">
+          <span class="node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+          <div class="step-top"><h3>We&rsquo;ve received you</h3><span class="stamp pop">28 Oct</span></div>
+          <p>Your profile came to us and joined the queue for review.</p>
+          <div class="step-date">Wed 28 Oct 2026</div>
+        </div>
+
+        <div class="step done">
+          <span class="node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+          <div class="step-top"><h3>Your counsellor is reviewing</h3><span class="stamp pop">30 Oct</span></div>
+          <p>Ananya checked your support background against data roles and mapped your domain change.</p>
+          <div class="step-date">Fri 30 Oct 2026</div>
+        </div>
+
+        <div class="step done">
+          <span class="node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+          <div class="step-top"><h3>Shortlisted</h3><span class="stamp pop">6 Nov</span></div>
+          <p>You were matched and put forward to Northgate Systems for Data Analyst — with your permission, given on 5 Nov.</p>
+          <div class="step-date">Fri 6 Nov 2026</div>
+        </div>
+
+        <div class="step ongoing">
+          <span class="node"></span>
+          <div class="step-top"><h3>In training</h3><span class="ongoing-pill">Ongoing</span></div>
+          <p>Training began on 10 Nov and runs alongside your interview — it isn&rsquo;t finished, and it doesn&rsquo;t need to be before you interview. You&rsquo;re on module 4 of 9 in your Domain Change programme.</p>
+          <div class="step-date">Started Tue 10 Nov 2026 · <a href="#training">See your training below</a></div>
+        </div>
+
+        <div class="step current" id="currentStep">
+          <span class="node"></span>
+          <div class="step-top"><h3>Interview scheduled</h3></div>
+          <p>Your first conversation with Northgate&rsquo;s hiring manager is confirmed. Full details are in the card below.</p>
+          <div class="step-date">Confirmed Thu 19 Nov 2026</div>
+          <div class="step-action"><a class="btn small primary" href="#interview">See interview card</a></div>
+        </div>
+
+        <div class="step future">
+          <span class="node"></span>
+          <div class="step-top"><h3>Interview done — waiting for feedback</h3></div>
+          <p>After your interview, Northgate usually replies within a few working days. Ananya will chase and update you — you won&rsquo;t have to ask.</p>
+        </div>
+
+        <div class="step future">
+          <span class="node"></span>
+          <div class="step-top"><h3>Offer received</h3></div>
+          <p>If Northgate offers you the role, the confirmed details will appear here — and Ananya will go through them with you before you sign anything.</p>
+        </div>
+
+        <div class="step future">
+          <span class="node"></span>
+          <div class="step-top"><h3>Placed — congratulations</h3></div>
+          <p>The day you join, this chapter closes with a stamp — and your counsellor checks in during your first week.</p>
+        </div>
+      </div>
+
+      <div class="branch-note">
+        <b>If a role pauses or doesn&rsquo;t work out:</b> an application can move to <b>On hold — not a rejection</b> (hiring paused, your place saved) or close as <b>Not selected for this role</b>, with one honest, forward-looking line from your counsellor and your next match already in motion. The marker never moves backwards, and a closed role never closes your journey.
+      </div>
+
+      <p class="meta-line"><b>Last updated</b> Thu 19 Nov 2026, 9:40 am · <b>Next update expected by</b> Sat 21 Nov 2026 — sooner if Northgate replies first. If a date ever passes with no news, you&rsquo;ll still get a short &ldquo;still waiting&rdquo; note here. Silence is not a status.</p>
+    </section>
+
+    <!-- 4 · Interview card -->
+    <section class="chapter" id="interview" aria-labelledby="interview-h" style="margin-top:36px">
+      <div class="interview-card">
+        <div class="ic-kicker">Coming up · Your interview</div>
+        <h3 id="interview-h">First conversation with the hiring manager</h3>
+        <p class="ic-when">Wednesday 25 Nov 2026 · 11:00 am IST · about 45 minutes</p>
+        <p class="ic-meta">Data Analyst · Northgate Systems · Video call · With Kavitha Menon, Hiring Manager</p>
+        <div class="prep">
+          <b>ANANYA&rsquo;S PREPARATION NOTES</b>
+          <ul>
+            <li>Revise Module 4 — SQL joins — the role leans on it heavily.</li>
+            <li>Keep one support story ready where you used data to solve a customer problem.</li>
+            <li>Test your camera and the meeting link the evening before.</li>
+          </ul>
+        </div>
+        <div class="ic-actions">
+          <button class="btn primary" type="button" id="confirmBtn2">Confirm attendance</button>
+          <button class="btn" type="button" id="calendarBtn">Add to calendar</button>
+          <button class="btn" type="button" id="rescheduleBtn">I need to reschedule</button>
+        </div>
+        <p class="confirmed-note" id="interviewConfirmed">✓ Confirmed — Ananya has been told. Good luck, Priya.</p>
+      </div>
+    </section>
+
+    <!-- 5 · Updates -->
+    <section class="chapter" id="updates" aria-labelledby="updates-h">
+      <div class="chapter-head"><span class="chapter-num">Chapter 02</span><h2 id="updates-h">Updates</h2></div>
+      <p class="chapter-sub">Every change to your journey, in the order it happened — newest first. The orange seal marks what you haven&rsquo;t seen yet; tap an update to mark it read.</p>
+
+      <div id="feedLive"></div>
+
+      <p class="feed-group">This week</p>
+      <div class="feed" id="feedMain">
+        <button class="feed-item unread" type="button">
+          <span class="f-seal"></span>
+          <span class="f-body">
+            <span class="f-actor">Ananya Rao · Your counsellor</span>
+            <h3>Interview confirmed</h3>
+            <p>Northgate confirmed your first conversation for Wednesday 25 Nov, 11:00 am. Preparation notes are in your interview card above.</p>
+            <span class="f-time">Thu 19 Nov 2026, 9:40 am · this morning</span>
+          </span>
+        </button>
+        <button class="feed-item read" type="button">
+          <span class="f-seal"></span>
+          <span class="f-body">
+            <span class="f-actor">HR team</span>
+            <h3>Email change requested — pending HR approval</h3>
+            <p>You asked to change your email on Wed 18 Nov. Your current email stays active and verified until HR approves the new one — see the request in Your profile &amp; resume.</p>
+            <span class="f-time">Wed 18 Nov 2026, 4:18 pm · yesterday</span>
+          </span>
+        </button>
+<button class="feed-item unread" type="button">
+          <span class="f-seal"></span>
+          <span class="f-body">
+            <span class="f-actor">Placement team</span>
+            <h3>Your resume was shared — with your permission</h3>
+            <p>Priya-Sharma-Data-Analyst.pdf was shared with Northgate Systems for the Data Analyst role, under the consent you gave on 5 Nov.</p>
+            <span class="f-time">Wed 18 Nov 2026, 3:15 pm · yesterday</span>
+          </span>
+        </button>
+
+        <button class="feed-item read" type="button">
+          <span class="f-seal"></span>
+          <span class="f-body">
+            <span class="f-actor">Training team</span>
+            <h3>Module 3 complete — well done</h3>
+            <p>You finished &ldquo;Excel to SQL: thinking in tables&rdquo; on 17 Nov. Module 4, SQL joins, is now open.</p>
+            <span class="f-time">Tue 17 Nov 2026, 6:02 pm · 2 days ago</span>
+          </span>
+        </button>
+      </div>
+
+      <div class="feed-more" id="feedMore">
+        <p class="feed-group">Earlier</p>
+        <div class="feed">
+          <button class="feed-item read" type="button">
+            <span class="f-seal"></span>
+            <span class="f-body">
+              <span class="f-actor">Ananya Rao · Your counsellor</span>
+              <h3>Mock interview feedback</h3>
+              <p>Your 12 Nov mock: &ldquo;Nearly there.&rdquo; Strong on explaining your support experience — one thing to work on is talking through your SQL out loud as you write it.</p>
+              <span class="f-time">Thu 12 Nov 2026, 7:48 pm · 1 week ago</span>
+            </span>
+          </button>
+          <button class="feed-item read" type="button">
+            <span class="f-seal"></span>
+            <span class="f-body">
+              <span class="f-actor">Ananya Rao · Your counsellor</span>
+              <h3>Still with Northgate — a short wait</h3>
+              <p>No news is still news: Northgate&rsquo;s team was in hiring-panel reviews last week. Ananya followed up on 10 Nov and expects word by 14 Nov. Nothing is needed from you.</p>
+              <span class="f-time">Tue 10 Nov 2026, 11:20 am · 1 week ago</span>
+            </span>
+          </button>
+          <button class="feed-item read" type="button">
+            <span class="f-seal"></span>
+            <span class="f-body">
+              <span class="f-actor">Placement team</span>
+              <h3>Shortlisted for Data Analyst</h3>
+              <p>You were matched to Northgate Systems and put forward for the Data Analyst role. Training to close your SQL gap starts 10 Nov.</p>
+              <span class="f-time">Fri 6 Nov 2026, 10:05 am · 2 weeks ago</span>
+            </span>
+          </button>
+          <button class="feed-item read" type="button">
+            <span class="f-seal"></span>
+            <span class="f-body">
+              <span class="f-actor">Placement team</span>
+              <h3>Welcome — your profile is with us</h3>
+              <p>We received your profile on 28 Oct. Ananya Rao is your counsellor and will review it against data roles this week.</p>
+              <span class="f-time">Wed 28 Oct 2026, 9:12 am · 3 weeks ago</span>
+            </span>
+          </button>
+        </div>
+      </div>
+      <button class="btn small" type="button" id="feedToggle" aria-expanded="false">See all updates</button>
+    </section>
+
+    <!-- 6 · Training -->
+    <section class="chapter" id="training" aria-labelledby="training-h">
+      <div class="training">
+        <div class="t-kicker">Chapter 03 · Your training</div>
+        <h3 id="training-h">Domain Change: Support → Data Analytics</h3>
+        <p class="t-sub">Trainer: Vikram Shetty · Started Tue 10 Nov 2026 · Built around your Northgate interview.</p>
+        <div class="progress-words"><span>3 of 9 modules done</span><span class="progress-rule"><i style="width:33%"></i></span><span>Module 4 in progress</span></div>
+
+        <div class="now-module">
+          <span class="nm-tag">Now · Module 4</span>
+          <h4>SQL joins, without the fear</h4>
+          <p>Joining tables across orders, customers and tickets — the exact pattern Northgate&rsquo;s team uses daily.</p>
+          <p class="nm-session"><b>Next session:</b> Fri 20 Nov 2026, 7:00 pm · Live class with Vikram</p>
+          <button class="btn" type="button" id="lessonBtn">Continue the 20-min lesson</button>
+        </div>
+
+        <div class="module-lists">
+          <div>
+            <h5>Completed</h5>
+            <ul>
+              <li><span>1 · Data thinking for support teams</span><span class="m-date">11 Nov</span></li>
+              <li><span>2 · Excel, properly</span><span class="m-date">13 Nov</span></li>
+              <li><span>3 · Excel to SQL: thinking in tables</span><span class="m-date">17 Nov</span></li>
+            </ul>
+          </div>
+          <div class="upcoming">
+            <h5>Still ahead</h5>
+            <ul>
+              <li><span>5 · Dashboards that answer questions</span><span class="m-date">week 3</span></li>
+              <li><span>6 · Power BI essentials</span><span class="m-date">week 4</span></li>
+              <li><span>7 · Telling the story in the data</span><span class="m-date">week 4</span></li>
+              <li><span>8 · Interview projects &amp; portfolio</span><span class="m-date">week 5</span></li>
+              <li><span>9 · Final mock &amp; readiness review</span><span class="m-date">week 6</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="mock-box">
+          <h5>Your last mock interview · 12 Nov</h5>
+          <span class="readiness">Nearly there</span>
+          <p><b>One strength:</b> you explain your support experience clearly and calmly — interviewers will trust you with customers.</p>
+          <p><b>One thing to work on:</b> talk through your SQL out loud as you write it, so the interviewer can follow your thinking.</p>
+          <p class="earlier">Earlier mocks: 5 Nov · Needs more practice — Next mock: Thu 26 Nov 2026, after your Northgate interview, to debrief and prepare for round two.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7 · Other applications -->
+    <section class="chapter" id="other-apps" aria-labelledby="other-h">
+      <div class="chapter-head"><span class="chapter-num">Chapter 04</span><h2 id="other-h">Your other applications</h2></div>
+      <p class="chapter-sub">Your Northgate journey above is the active one. These sit alongside it.</p>
+
+      <div class="app-row">
+        <div class="a-main"><b>Business Analyst — Trainee · Clearpath Retail Group</b><span>Hyderabad · Applied via your counsellor · 3 Nov 2026</span></div>
+        <span class="pill hold">On hold — not a rejection</span>
+      </div>
+      <p class="meta-line" style="margin:0 0 16px 4px">Clearpath has paused hiring for this role. Your place is saved, and Ananya will restart it or match you elsewhere by <b>5 Dec 2026</b>. Keep preparing — your data training counts here too.</p>
+
+      <details class="finished">
+        <summary>Finished applications (1)</summary>
+        <div class="app-row">
+          <div class="a-main"><b>Support Analyst · Meridian Cloud Services</b><span>Remote · Closed 24 Oct 2026</span></div>
+          <span class="pill closed">Not selected for this role</span>
+        </div>
+        <p class="meta-line" style="margin:0 0 6px 4px">Meridian needed deeper SQL experience for that team — which is exactly what your training is building now. Ananya matched you to Northgate three days later.</p>
+      </details>
+    </section>
+
+    <!-- 8 · Jobs for you -->
+    <section class="chapter" id="jobs" aria-labelledby="jobs-h">
+      <div class="chapter-head"><span class="chapter-num">Chapter 05</span><h2 id="jobs-h">Suggestions for you</h2></div>
+      <p class="chapter-sub">Openings matched to your profile by Ananya — each with the honest reason it fits. Suggestions refresh whenever you edit your skills or choices below.</p>
+      <p class="refresh-note" id="suggestionRefresh">Matched to your current profile · <b>Updated Thu 19 Nov 2026, 9:40 am</b></p>
+
+      <div class="job-row" data-job data-role="Data Analyst" data-location="Chennai" data-mode="Hybrid" data-skills="SQL, Customer support">
+        <div class="j-top"><h3>Junior Data Analyst</h3><span class="j-co">Harbourline Logistics</span></div>
+        <p class="j-meta">Chennai · Hybrid · Freshers &amp; domain changers welcome</p>
+        <p class="j-why">&ldquo;Matches your SQL training and your support background — this team hires from customer teams on purpose.&rdquo;</p>
+        <div class="j-actions">
+          <button class="btn small primary" type="button" data-apply>Apply</button>
+          <span class="applied-note">✓ Applied — Ananya has your application</span>
+          <button class="btn small forest" type="button" data-save>Save this role</button>
+          <span class="saved-note">✓ Saved — Ananya can see this</span>
+          <button class="btn small" type="button" data-dismiss>Not interested</button>
+        </div>
+      </div>
+
+      <div class="job-row" data-job data-role="Reporting Analyst" data-location="Bengaluru" data-mode="Office" data-skills="Excel, SQL, Power BI">
+        <div class="j-top"><h3>Reporting Analyst</h3><span class="j-co">Solace Health Systems</span></div>
+        <p class="j-meta">Bengaluru · On-site · Excel + SQL</p>
+        <p class="j-why">&ldquo;Your Modules 2–4 cover most of what this role asks for, and the team trains on Power BI.&rdquo;</p>
+        <div class="j-actions">
+          <button class="btn small primary" type="button" data-apply>Apply</button>
+          <span class="applied-note">✓ Applied — Ananya has your application</span>
+          <button class="btn small forest" type="button" data-save>Save this role</button>
+          <span class="saved-note">✓ Saved — Ananya can see this</span>
+          <button class="btn small" type="button" data-dismiss>Not interested</button>
+        </div>
+      </div>
+
+      <div class="job-row" data-job data-role="Data Operations" data-location="Pune" data-mode="Remote" data-skills="Excel, SQL">
+        <div class="j-top"><h3>Data Operations Associate</h3><span class="j-co">FinEdge Technologies</span></div>
+        <p class="j-meta">Pune · Remote · Immediate joiners</p>
+        <p class="j-why">&ldquo;A good second option if you want to stay remote while you finish the programme.&rdquo;</p>
+        <div class="j-actions">
+          <button class="btn small primary" type="button" data-apply>Apply</button>
+          <span class="applied-note">✓ Applied — Ananya has your application</span>
+          <button class="btn small forest" type="button" data-save>Save this role</button>
+          <span class="saved-note">✓ Saved — Ananya can see this</span>
+          <button class="btn small" type="button" data-dismiss>Not interested</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9 · Profile & resume -->
+    <section class="chapter" id="profile" aria-labelledby="profile-h">
+      <div class="chapter-head"><span class="chapter-num">Chapter 06</span><h2 id="profile-h">Your profile &amp; resume</h2></div>
+      <p class="chapter-sub">Companies ask for these details before we can put you forward — a complete profile simply moves faster.</p>
+
+      <div class="completeness">
+        <div class="c-top"><b>Profile completeness</b><span id="completenessPct">90% complete</span></div>
+        <div class="c-rule"><i id="completenessBar" style="width:90%"></i></div>
+        <button class="next-missing" type="button" id="checklistToggle" aria-expanded="false">
+          <span id="nextMissingText">One thing left that matters most: add your notice period</span><span aria-hidden="true">→</span>
+        </button>
+        <ul class="checklist" id="checklist">
+          <li data-check="resume"><span class="tick">✓</span><span>Resume uploaded</span></li>
+          <li data-check="contact"><span class="tick">✓</span><span>Mobile &amp; email verified — locked fields, changed only with HR approval</span></li>
+          <li data-check="personal"><span class="tick">✓</span><span>Personal details — Priya Sharma, Bengaluru</span></li>
+          <li data-check="work"><span class="tick">✓</span><span>Employment history — Support Executive, 2 years 5 months</span></li>
+          <li data-check="education"><span class="tick">✓</span><span>Education — B.Com, 2022</span></li>
+          <li data-check="skills"><span class="tick">✓</span><span>Skills — Excel, SQL, customer support, ticket analysis</span></li>
+          <li data-check="languages"><span class="tick">✓</span><span>Languages — English, Hindi, Kannada</span></li>
+          <li data-check="online"><span class="tick">✓</span><span>Online profiles — LinkedIn added</span></li>
+          <li data-check="preferences"><span class="tick">✓</span><span>Job preferences — roles, locations and work mode chosen in Your choices</span></li>
+          <li data-check="notice"><span class="todo">○</span><span>Notice period — not added yet</span></li>
+          <li class="why" style="border-bottom:none">This updates itself as you edit below — no separate save page, ever.</li>
+        </ul>
+      </div>
+
+      <div class="resume-card">
+        <div class="r-top">
+          <div class="file-badge">PDF</div>
+          <div class="r-meta">
+            <b id="resumeName">Priya-Sharma-Data-Analyst.pdf</b>
+            <span id="resumeMeta">Uploaded 5 Nov 2026 · 212 KB · Your primary resume</span>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <button class="btn small" type="button" id="viewResumeBtn">View</button>
+            <label class="btn small" for="resumeFile" style="cursor:pointer">Replace</label>
+            <input class="hidden-file" type="file" id="resumeFile" accept=".pdf,.doc,.docx" />
+          </div>
+        </div>
+        <div class="share-log">
+          <h5>Where your resume has gone</h5>
+          <p><b>Northgate Systems</b> · Data Analyst · shared 18 Nov 2026 by Ananya Rao · with your consent of 5 Nov 2026</p>
+          <p>Nowhere else. Your resume is shared only with employers you approve, one named company and one named role at a time.</p>
+        </div>
+        <p class="privacy-line">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <span>Replacing a resume that is live with a company asks for your confirmation first — in this sample, the file you pick stays in this page only and is stored nowhere.</span>
+        </p>
+      </div>
+
+      <div class="panel" id="verifiedContacts">
+        <h3>Verified contact details</h3>
+        <p class="panel-sub">These two are locked because companies and interview calls depend on them. You can&rsquo;t edit them directly — a change goes to the HR team for approval first, and your current details stay active until they approve.</p>
+
+        <div class="contact-row">
+          <div class="ct-main"><span>Mobile number · Current</span><b id="currentMobile">+91 98110 24680</b></div>
+          <span class="verified-pill">✓ Verified</span>
+          <button class="btn small" type="button" data-request-change="Mobile number">Request change</button>
+        </div>
+        <div class="contact-row">
+          <div class="ct-main"><span>Email · Current</span><b id="currentEmail">priya.sharma@example.com</b></div>
+          <span class="verified-pill">✓ Verified</span>
+          <button class="btn small" type="button" data-request-change="Email">Request change</button>
+        </div>
+
+        <div id="requestList">
+          <div class="request-card">
+            <div class="rq-top"><h4>Email change</h4><span class="pending-pill">Pending HR approval</span></div>
+            <p>Requested new email: <b>priya.data.jobs@example.com</b> · Reason: &ldquo;I use this inbox for job updates.&rdquo;</p>
+            <p>Submitted <b>Wed 18 Nov 2026, 4:18 pm</b> · Your current email above stays active and verified until HR approves.</p>
+          </div>
+        </div>
+
+        <p class="lifecycle"><b>How approval works:</b> HR reviews the request and may ask you to verify the new mobile or email. When they approve it, the new detail becomes your verified one; if they decline it, your current detail simply stays. Either way, the outcome appears in your Updates and is sent on the channels you&rsquo;ve chosen below.</p>
+
+        <form id="changeRequestForm" novalidate>
+          <div class="form-grid">
+            <div class="field">
+              <label for="crField">Which detail?</label>
+              <select id="crField">
+                <option>Mobile number</option>
+                <option>Email</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="crValue">New mobile or email</label>
+              <input id="crValue" type="text" inputmode="email" placeholder="Enter the new detail" autocomplete="off" />
+            </div>
+            <div class="field wide">
+              <label for="crReason">Short reason</label>
+              <textarea id="crReason" placeholder="Example: I changed my SIM last week and the old number is no longer active."></textarea>
+            </div>
+          </div>
+          <p class="form-error" id="crError">Please add the new detail and a short reason, so HR can review it.</p>
+          <div class="save-row">
+            <button class="btn primary" type="submit">Send request to HR</button>
+            <button class="btn" type="button" id="crCancel">Cancel</button>
+          </div>
+          <p class="form-ok" id="crOk">Request raised — it is shown above as Pending HR approval, and your current detail is unchanged.</p>
+        </form>
+      </div>
+
+      <form class="panel" id="profileForm">
+        <h3>Your details — edit them right here</h3>
+        <p class="panel-sub">Everything in this form is yours to change. Ordinary details save as you type — watch the saved note — and your completeness above updates itself. Job preferences live in <a href="#choices">Your choices</a> and count toward completeness too.</p>
+
+        <p class="form-section-title">Personal details</p>
+        <div class="form-grid">
+          <div class="field"><label for="pfName">Full name</label><input id="pfName" type="text" value="Priya Sharma" /></div>
+          <div class="field"><label for="pfLocation">Current location</label><input id="pfLocation" type="text" value="Bengaluru, Karnataka" /></div>
+          <div class="field wide"><label for="pfLanguages">Languages</label><input id="pfLanguages" type="text" value="English, Hindi, Kannada" /></div>
+        </div>
+
+        <p class="form-section-title">Work &amp; employment history</p>
+        <div class="form-grid">
+          <div class="field"><label for="pfRole">Current role</label><input id="pfRole" type="text" value="Support Executive" /></div>
+          <div class="field"><label for="pfCompany">Current company</label><input id="pfCompany" type="text" value="BrightDesk Support Services" /></div>
+          <div class="field"><label for="pfExperience">Total experience</label><input id="pfExperience" type="text" value="2 years 5 months" /></div>
+          <div class="field"><label for="pfNotice">Notice period</label><input id="pfNotice" type="text" value="" placeholder="Example: 30 days" /><p class="hint">This is the one thing your profile is still missing.</p></div>
+          <div class="field wide"><label for="pfHistory">Employment history</label><textarea id="pfHistory">BrightDesk Support Services — Support Executive, Mar 2025 to present. Resolving customer tickets, tracking repeat issues, weekly service reports.
+FreshMart Retail — Customer Associate, Jun 2024 to Feb 2025. Billing support and customer queries.</textarea></div>
+        </div>
+
+        <p class="form-section-title">Education</p>
+        <div class="form-grid">
+          <div class="field"><label for="pfQualification">Qualification</label><input id="pfQualification" type="text" value="B.Com" /></div>
+          <div class="field"><label for="pfInstitution">Institution</label><input id="pfInstitution" type="text" value="Bengaluru City University" /></div>
+          <div class="field"><label for="pfYear">Year completed</label><input id="pfYear" type="text" inputmode="numeric" value="2022" /></div>
+        </div>
+
+        <p class="form-section-title">Skills &amp; online profiles</p>
+        <div class="form-grid">
+          <div class="field wide"><label for="pfSkills">Skills</label><input id="pfSkills" type="text" value="Excel, SQL, Customer support, Ticket analysis" /><p class="hint">Suggestions above re-match when your skills change.</p></div>
+          <div class="field"><label for="pfLinkedIn">LinkedIn</label><input id="pfLinkedIn" type="text" value="linkedin.com/in/priya-sharma-sample" /></div>
+          <div class="field"><label for="pfPortfolio">Portfolio / GitHub (optional)</label><input id="pfPortfolio" type="text" value="" placeholder="Add a link if you have one" /></div>
+        </div>
+
+        <div class="save-row">
+          <span class="save-state" id="profileSaveState">All changes saved · sample profile</span>
+          <span style="font-size:.83rem;color:var(--ink-faint)">No save button — it saves as you type.</span>
+        </div>
+      </form>
+    </section>
+
+    <!-- 10 · Your choices -->
+    <section class="chapter" id="choices" aria-labelledby="choices-h">
+      <div class="chapter-head"><span class="chapter-num">Chapter 07</span><h2 id="choices-h">Your choices</h2></div>
+      <p class="chapter-sub">Your preferences, in your hands — change them whenever your plans change. Every change saves straight away and re-matches your suggestions.</p>
+
+      <div class="panel">
+        <h3>Roles, places &amp; how you work</h3>
+        <p class="choice-label" id="rolesLabel">Target roles</p>
+        <div class="chip-row" role="group" aria-labelledby="rolesLabel" id="roleChips">
+          <button class="chip" type="button" aria-pressed="true">Data Analyst</button>
+          <button class="chip" type="button" aria-pressed="true">Reporting Analyst</button>
+          <button class="chip" type="button" aria-pressed="false">Business Analyst</button>
+          <button class="chip" type="button" aria-pressed="false">Data Operations</button>
+        </div>
+        <p class="choice-label" id="locLabel">Preferred locations</p>
+        <div class="chip-row" role="group" aria-labelledby="locLabel" id="locationChips">
+          <button class="chip" type="button" aria-pressed="true">Bengaluru</button>
+          <button class="chip" type="button" aria-pressed="true">Remote</button>
+          <button class="chip" type="button" aria-pressed="false">Chennai</button>
+          <button class="chip" type="button" aria-pressed="false">Hyderabad</button>
+          <button class="chip" type="button" aria-pressed="false">Pune</button>
+        </div>
+        <p class="choice-label">Work mode</p>
+        <div class="mode-row" role="radiogroup" aria-label="Work mode">
+          <label><input type="radio" name="workMode" value="Office" /> Office</label>
+          <label><input type="radio" name="workMode" value="Hybrid" checked /> Hybrid</label>
+          <label><input type="radio" name="workMode" value="Remote" /> Remote</label>
+        </div>
+        <div class="form-grid" style="margin-top:18px">
+          <div class="field">
+            <label for="domainSelect">Domain change</label>
+            <select id="domainSelect">
+              <option selected>Yes — Customer Support → Data Analytics</option>
+              <option>Thinking about it — advise me</option>
+              <option>No — staying in my domain</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="availabilitySelect">Availability to start</label>
+            <select id="availabilitySelect">
+              <option>Immediately</option>
+              <option>Within 2 weeks</option>
+              <option selected>After my notice period</option>
+              <option>After 1 month</option>
+            </select>
+          </div>
+        </div>
+        <div class="save-row"><span class="save-state" id="prefSaveState">Preferences saved · sample profile</span></div>
+      </div>
+
+      <div class="panel">
+        <h3>Notifications — status and suggestions stay separate</h3>
+        <p class="panel-sub">Job-status updates and job recommendations are two different promises. Status news is never mixed with recommendations, and you control each channel separately.</p>
+        <div class="notif-grid" role="group" aria-label="Notification preferences">
+          <div class="notif-head"><span>Type</span><span>WhatsApp</span><span>Email</span><span>In-page</span></div>
+          <div class="notif-row">
+            <div class="n-cat">Job-status updates<span>Tracker changes, interviews, outcomes</span></div>
+            <label class="switch" data-ch="WhatsApp"><input type="checkbox" class="notif-toggle" checked /><span class="track"></span>On</label>
+            <label class="switch" data-ch="Email"><input type="checkbox" class="notif-toggle" checked /><span class="track"></span>On</label>
+            <label class="switch" data-ch="In-page"><input type="checkbox" class="notif-toggle" checked /><span class="track"></span>On</label>
+          </div>
+          <div class="notif-row">
+            <div class="n-cat">Job recommendations<span>Suggestions matched to your profile</span></div>
+            <label class="switch" data-ch="WhatsApp"><input type="checkbox" class="notif-toggle" /><span class="track"></span>Off</label>
+            <label class="switch" data-ch="Email"><input type="checkbox" class="notif-toggle" checked /><span class="track"></span>On</label>
+            <label class="switch" data-ch="In-page"><input type="checkbox" class="notif-toggle" checked /><span class="track"></span>On</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>Privacy &amp; visibility</h3>
+        <div class="form-grid">
+          <div class="field wide">
+            <label for="visibilitySelect">Who can see my profile?</label>
+            <select id="visibilitySelect">
+              <option selected>Only companies my counsellor confirms with me first</option>
+              <option>Companies Ananya shortlists for my target roles</option>
+              <option>No one right now — pause my visibility</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="blockInput">Block a company</label>
+            <input id="blockInput" type="text" placeholder="Company name" />
+          </div>
+          <div class="field" style="display:flex;align-items:flex-end">
+            <button class="btn" type="button" id="blockBtn">Block company</button>
+          </div>
+        </div>
+        <div class="blocked-list" id="blockedList">
+          <span class="blocked-item">Northline Staffing <button type="button" data-unblock aria-label="Remove Northline Staffing from blocked companies">Remove</button></span>
+        </div>
+        <p class="lifecycle">A blocked company never sees your profile or resume — not for any role, ever, until you remove the block.</p>
+      </div>
+    </section>
+
+    <!-- 11 · Refer a friend -->
+    <section class="chapter" id="refer" aria-labelledby="refer-h">
+      <div class="chapter-head"><span class="chapter-num">Chapter 08</span><h2 id="refer-h">Refer a friend</h2></div>
+      <p class="chapter-sub">Know someone who deserves the same support you&rsquo;re getting? Point them our way — and follow their progress here, stage by stage. You&rsquo;ll see status only, never the private details of their journey.</p>
+
+      <div class="refer-layout">
+        <form class="panel" id="referForm" style="margin-bottom:0">
+          <h3>Refer someone you believe in</h3>
+          <p class="panel-sub">Please refer only someone who is happy to hear from us.</p>
+          <div class="form-grid" style="grid-template-columns:1fr">
+            <div class="field"><label for="rfName">Friend&rsquo;s name</label><input id="rfName" type="text" placeholder="Their full name" autocomplete="off" /></div>
+            <div class="field"><label for="rfContact">Friend&rsquo;s mobile or email</label><input id="rfContact" type="text" placeholder="How we reach them" autocomplete="off" /></div>
+            <div class="field"><label for="rfRole">Role or field they&rsquo;re interested in</label><input id="rfRole" type="text" placeholder="Example: Data roles, support, design…" autocomplete="off" /></div>
+          </div>
+          <p class="form-error" id="rfError">Please add your friend&rsquo;s name, a mobile or email, and the field they&rsquo;re interested in.</p>
+          <div class="save-row">
+            <button class="btn primary" type="submit">Refer my friend</button>
+            <a class="btn" href="https://wa.me/?text=Hi%2C%20I%20wanted%20to%20tell%20you%20about%20the%20placement%20support%20I%27m%20using%20%E2%80%94%20training%2C%20interview%20preparation%20and%20a%20counsellor%20who%20stays%20with%20you.%20I%20can%20refer%20you%20if%20you%27d%20like." rel="noopener">Invite on WhatsApp</a>
+          </div>
+          <p class="form-ok" id="rfOk">Referred — your friend now appears in your referral tracker below, at the first stage.</p>
+        </form>
+
+        <div class="panel" style="margin-bottom:0">
+          <h3>Your referral tracker</h3>
+          <p class="panel-sub">Referred → Contacted → In process → Interviewing → Placed. Dates show when each stage was reached.</p>
+          <div id="referralList">
+            <div class="referral-card">
+              <div class="rf-top"><b>Sneha Kulkarni</b><span class="rf-meta">Business analytics · Referred 4 Nov 2026</span></div>
+              <ol class="ref-track">
+                <li class="done">Referred<span class="rf-date">4 Nov</span></li>
+                <li class="done">Contacted<span class="rf-date">5 Nov</span></li>
+                <li class="current">In process<span class="rf-date">12 Nov</span></li>
+                <li>Interviewing<span class="rf-date">—</span></li>
+                <li>Placed<span class="rf-date">—</span></li>
+              </ol>
+            </div>
+            <div class="referral-card">
+              <div class="rf-top"><b>Kavya Nair</b><span class="rf-meta">Support → operations · Referred 16 Nov 2026</span></div>
+              <ol class="ref-track">
+                <li class="done">Referred<span class="rf-date">16 Nov</span></li>
+                <li class="current">Contacted<span class="rf-date">18 Nov</span></li>
+                <li>In process<span class="rf-date">—</span></li>
+                <li>Interviewing<span class="rf-date">—</span></li>
+                <li>Placed<span class="rf-date">—</span></li>
+              </ol>
+            </div>
+            <div class="referral-card">
+              <div class="rf-top"><b>Rohit Verma</b><span class="rf-meta">Data roles · Referred 21 Oct 2026</span></div>
+              <ol class="ref-track">
+                <li class="done placed-all">Referred<span class="rf-date">21 Oct</span></li>
+                <li class="done placed-all">Contacted<span class="rf-date">23 Oct</span></li>
+                <li class="done placed-all">In process<span class="rf-date">30 Oct</span></li>
+                <li class="done placed-all">Interviewing<span class="rf-date">7 Nov</span></li>
+                <li class="done placed-all">Placed<span class="rf-date">14 Nov</span></li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 · Privacy -->
+    <div class="privacy-block">
+      <h3>Your privacy, in plain words</h3>
+      <p>Your details are visible to <b>only the companies your counsellor confirms with you first</b>. Nothing about other candidates ever appears on your page, and your team&rsquo;s internal notes are never shown here — only updates written for you.</p>
+      <ul>
+        <li><b>Sharing consent</b> — given 5 Nov 2026, for Northgate Systems, Data Analyst role only.</li>
+        <li><b>Future roles</b> — you have <b>not</b> opted in to a general talent pool; each new company needs your fresh OK.</li>
+        <li><b>Updates</b> — you receive status and interview updates on WhatsApp and email (headline + link only, never the full details in the message). Recommendations arrive separately, and only if you ask for them.</li>
+        <li><b>Your controls</b> — visibility, blocked companies and notification choices live in <a href="#choices">Your choices</a> above; you can also download your data or ask for it to be deleted. Withdrawing consent is as easy as giving it was.</li>
+      </ul>
+    </div>
+
+    <footer class="site-foot">
+      <div class="big">One page. <em>Your whole journey.</em></div>
+      <p>Questions? Your counsellor Ananya Rao is one tap away — WhatsApp or call, Mon–Sat, 10am–6pm.</p>
+      <p>Draft presentation sample — all names, companies, roles and dates on this page are illustrative sample content. Edits, requests and referrals are held only in this page for the presentation and reset when it closes; in the live version they save to the candidate&rsquo;s profile and the HR team&rsquo;s queue. The tracker shows how updates from a future counsellor dashboard will appear to a candidate.</p>
+    </footer>
+  </main>
+
+  <!-- Rail (desktop) / inline after greeting (mobile) -->
+  <aside class="rail" aria-label="Your next step and quick facts">
+    <div class="next-thing rail-only js-next-thing">
+      <div class="nt-kicker">Your next thing · One only</div>
+      <div class="js-next-live">
+        <h2>Confirm your interview</h2>
+        <p>Your first conversation with Northgate&rsquo;s hiring manager is <b>Wednesday 25 Nov, 11:00 am</b>. Confirm you can make it, then read Ananya&rsquo;s preparation notes in the interview card.</p>
+        <div class="nt-actions">
+          <button class="btn primary js-confirm" type="button">Confirm attendance</button>
+          <a class="btn" href="#interview">See the card</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="next-thing rail-only" style="border-left-color:var(--forest)">
+      <div class="nt-kicker" style="color:var(--forest)">At a glance</div>
+      <h2 style="font-size:1.15rem">Where things stand</h2>
+      <p style="margin-bottom:8px"><b>Active journey:</b> Data Analyst · Northgate Systems<br />
+      <b>Stage:</b> Interview scheduled<br />
+      <b>Training:</b> Module 4 of 9 · next session Fri 20 Nov, 7:00 pm<br />
+      <b>Last updated:</b> Thu 19 Nov, 9:40 am<br />
+      <b>Next update by:</b> Sat 21 Nov 2026</p>
+      <div class="nt-actions">
+        <a class="btn small" href="#updates">Updates <span id="railUnread" style="color:var(--accent-deep);font-weight:800">· 2 new</span></a>
+        <a class="btn small" href="#profile">My profile · <span id="railProfilePct">90%</span></a>
+      </div>
+    </div>
+  </aside>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+  "use strict";
+  var toast = document.getElementById('toast');
+  var toastTimer = null;
+  function showToast(msg){
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ toast.classList.remove('show'); }, 3400);
+  }
+
+  /* ---- unread seal handling ---- */
+  var headerSeal = document.getElementById('headerSeal');
+  var railUnread = document.getElementById('railUnread');
+  function refreshUnread(){
+    var n = document.querySelectorAll('.feed-item.unread').length;
+    if(n === 0){
+      if(headerSeal && !headerSeal.classList.contains('broken')){
+        headerSeal.classList.add('broken');
+        setTimeout(function(){ headerSeal.style.display = 'none'; }, 550);
+      }
+      if(railUnread) railUnread.textContent = '';
+    } else {
+      if(railUnread) railUnread.textContent = '· ' + n + ' new';
+    }
+  }
+  document.querySelectorAll('.feed-item').forEach(function(item){
+    item.addEventListener('click', function(){
+      if(item.classList.contains('unread')){
+        item.classList.remove('unread');
+        item.classList.add('seal-broken');
+        setTimeout(function(){ item.classList.add('read'); refreshUnread(); }, 420);
+        refreshUnreadSoon();
+      }
+    });
+  });
+  function refreshUnreadSoon(){ setTimeout(refreshUnread, 430); }
+
+  /* ---- add an event to the top of the Updates feed ---- */
+  function addFeedEvent(actor, title, body, timeText){
+    var liveFeed = document.getElementById('feedLive');
+    if(!liveFeed.querySelector('.feed-group')){
+      var group = document.createElement('p');
+      group.className = 'feed-group';
+      group.textContent = 'Just now';
+      liveFeed.appendChild(group);
+    }
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'feed-item unread';
+    btn.innerHTML = '<span class="f-seal"></span><span class="f-body">' +
+      '<span class="f-actor"></span><h3></h3><p></p><span class="f-time"></span></span>';
+    btn.querySelector('.f-actor').textContent = actor;
+    btn.querySelector('h3').textContent = title;
+    btn.querySelector('p').textContent = body;
+    btn.querySelector('.f-time').textContent = timeText;
+    btn.addEventListener('click', function(){
+      if(btn.classList.contains('unread')){
+        btn.classList.remove('unread'); btn.classList.add('seal-broken');
+        setTimeout(function(){ btn.classList.add('read'); refreshUnread(); }, 420);
+      }
+    });
+    liveFeed.appendChild(btn);
+    refreshUnread();
+  }
+
+  /* ---- feed show all ---- */
+  var feedToggle = document.getElementById('feedToggle');
+  var feedMore = document.getElementById('feedMore');
+  feedToggle.addEventListener('click', function(){
+    var open = feedMore.classList.toggle('open');
+    feedToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    feedToggle.textContent = open ? 'Show fewer updates' : 'See all updates';
+  });
+
+  /* ---- confirm attendance: next-thing card + interview card ---- */
+  var confirmed = false;
+  function doConfirm(){
+    if(confirmed) return;
+    confirmed = true;
+    var now = new Date();
+    var timeStr = now.toLocaleTimeString('en-IN', {hour:'numeric', minute:'2-digit'});
+    var liveBlocks = document.querySelectorAll('.js-next-live');
+    liveBlocks.forEach(function(live){
+      live.innerHTML = '<p class="receipt-stamp">✓ Done — attendance confirmed</p>' +
+        '<p style="margin-top:8px">Ananya has been told, today at ' + timeStr + '. Next: read the preparation notes in your interview card, and revise Module 4 before Wednesday.</p>' +
+        '<div class="nt-actions"><a class="btn forest" href="#interview">Read preparation notes</a></div>';
+    });
+    document.querySelectorAll('.js-next-thing').forEach(function(card){ card.classList.add('done'); });
+    var ic = document.getElementById('interviewConfirmed');
+    if(ic) ic.classList.add('show');
+    var b2 = document.getElementById('confirmBtn2');
+    if(b2){ b2.disabled = true; b2.textContent = '✓ Confirmed'; }
+    /* matching feed event appears at the top of Updates */
+    addFeedEvent('You · Just now', 'Attendance confirmed',
+      'You confirmed your Northgate interview for Wednesday 25 Nov, 11:00 am. Ananya has been notified.',
+      'Just now · in this sample, nothing was actually sent');
+    showToast('Attendance confirmed — Ananya has been told.');
+    document.getElementById('thread').style.setProperty('--thread-fill','58%');
+  }
+  document.querySelectorAll('.js-confirm').forEach(function(b){ b.addEventListener('click', doConfirm); });
+  document.getElementById('confirmBtn2').addEventListener('click', doConfirm);
+
+  document.getElementById('calendarBtn').addEventListener('click', function(){
+    showToast('In the live version this adds the interview to your calendar.');
+  });
+  document.getElementById('rescheduleBtn').addEventListener('click', function(){
+    showToast('Ananya will call you to find a new time — no forms, just a conversation.');
+  });
+  document.getElementById('lessonBtn').addEventListener('click', function(){
+    showToast('In the live version your Module 4 lesson opens here.');
+  });
+  document.getElementById('viewResumeBtn').addEventListener('click', function(){
+    showToast('Sample only — no real resume file is attached to this page.');
+  });
+
+  /* ---- completeness checklist ---- */
+  var ct = document.getElementById('checklistToggle');
+  var cl = document.getElementById('checklist');
+  ct.addEventListener('click', function(){
+    var open = cl.classList.toggle('open');
+    ct.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+
+  /* ---- resume replace (in-page only) ---- */
+  var resumeFile = document.getElementById('resumeFile');
+  resumeFile.addEventListener('change', function(){
+    if(resumeFile.files && resumeFile.files[0]){
+      var f = resumeFile.files[0];
+      document.getElementById('resumeName').textContent = f.name;
+      document.getElementById('resumeMeta').textContent = 'Selected just now · ' + Math.max(1, Math.round(f.size/1024)) + ' KB · held in this page only — stored nowhere';
+      showToast('Resume selected in this page only. Nothing was uploaded or stored.');
+    }
+  });
+
+  /* ---- suggestions: apply / save / dismiss + refresh on profile edits ---- */
+  function selectedChips(containerId){
+    var out = [];
+    document.querySelectorAll('#' + containerId + ' .chip[aria-pressed="true"]').forEach(function(c){ out.push(c.textContent.trim()); });
+    return out;
+  }
+  function refreshSuggestions(source){
+    var roles = selectedChips('roleChips');
+    var locs = selectedChips('locationChips');
+    var modeEl = document.querySelector('input[name="workMode"]:checked');
+    var mode = modeEl ? modeEl.value : '';
+    var skillsField = document.getElementById('pfSkills');
+    var skills = skillsField ? skillsField.value.split(',').map(function(s){ return s.trim().toLowerCase(); }).filter(Boolean) : [];
+    document.querySelectorAll('[data-job]').forEach(function(row){
+      if(row.style.display === 'none') return;
+      var why = row.querySelector('.j-why');
+      var bits = [];
+      if(roles.indexOf(row.dataset.role) > -1) bits.push('it matches your target role, ' + row.dataset.role);
+      if(locs.indexOf(row.dataset.location) > -1) bits.push(row.dataset.location + ' is one of your preferred locations');
+      if(mode && row.dataset.mode === mode) bits.push('the ' + row.dataset.mode.toLowerCase() + ' working pattern suits your chosen work mode');
+      var jobSkills = (row.dataset.skills || '').split(',').map(function(s){ return s.trim().toLowerCase(); });
+      var overlap = jobSkills.filter(function(s){ return skills.indexOf(s) > -1; });
+      if(overlap.length) bits.push('your ' + overlap.join(' and ') + ' skills line up with what it asks for');
+      if(bits.length){
+        why.textContent = '\u201CMatched because ' + bits.join('; ') + '.\u201D';
+      }
+    });
+    var note = document.getElementById('suggestionRefresh');
+    if(note) note.innerHTML = 'Matched to your current profile · <b>Refreshed just now — ' + source + '</b>';
+  }
+  document.querySelectorAll('[data-job]').forEach(function(row){
+    var saveBtn = row.querySelector('[data-save]');
+    var disBtn = row.querySelector('[data-dismiss]');
+    var applyBtn = row.querySelector('[data-apply]');
+    var title = row.querySelector('h3').textContent;
+    var company = row.querySelector('.j-co').textContent;
+    if(applyBtn){
+      applyBtn.addEventListener('click', function(){
+        if(row.classList.contains('applied')) return;
+        row.classList.add('applied');
+        applyBtn.disabled = true;
+        applyBtn.textContent = 'Applied ✓';
+        addFeedEvent('Placement team', 'You applied — ' + title,
+          'Your application for ' + title + ' at ' + company + ' is with Ananya, who will review it against your profile and update your tracker.',
+          'Just now · in this sample, nothing was actually sent');
+        showToast('Applied for ' + title + ' — Ananya has it from here.');
+      });
+    }
+    saveBtn.addEventListener('click', function(){
+      var saved = row.classList.toggle('saved');
+      saveBtn.textContent = saved ? 'Saved ✓' : 'Save this role';
+      showToast(saved ? 'Saved — your counsellor can see your saved roles.' : 'Removed from your saved roles.');
+    });
+    disBtn.addEventListener('click', function(){
+      row.style.display = 'none';
+      showToast('Noted — Ananya will stop matching you to roles like this.');
+    });
+  });
+
+  /* ---- editable profile: autosave, completeness, next missing item ---- */
+  function filled(id){ var el = document.getElementById(id); return !!(el && el.value.trim().length); }
+  function anyFilled(ids){ return ids.some(filled); }
+  function allFilled(ids){ return ids.every(filled); }
+  var completenessChecks = [
+    { key:'resume',      done:function(){ return true; },                                                        label:'upload your resume' },
+    { key:'contact',     done:function(){ return true; },                                                        label:'verify your mobile and email' },
+    { key:'personal',    done:function(){ return allFilled(['pfName','pfLocation']); },                          label:'add your personal details' },
+    { key:'work',        done:function(){ return allFilled(['pfRole','pfCompany','pfHistory']); },               label:'complete your employment history' },
+    { key:'education',   done:function(){ return allFilled(['pfQualification','pfInstitution','pfYear']); },     label:'add your education' },
+    { key:'skills',      done:function(){ return filled('pfSkills'); },                                          label:'add your skills' },
+    { key:'languages',   done:function(){ return filled('pfLanguages'); },                                       label:'add the languages you speak' },
+    { key:'online',      done:function(){ return anyFilled(['pfLinkedIn','pfPortfolio']); },                     label:'add an online profile, like LinkedIn' },
+    { key:'preferences', done:function(){ return selectedChips('roleChips').length > 0 && selectedChips('locationChips').length > 0; }, label:'choose your target roles and locations in Your choices' },
+    { key:'notice',      done:function(){ return filled('pfNotice'); },                                          label:'add your notice period' }
+  ];
+  function updateCompleteness(){
+    var doneCount = 0;
+    completenessChecks.forEach(function(c){
+      var li = document.querySelector('#checklist li[data-check="' + c.key + '"]');
+      var isDone = c.done();
+      if(isDone) doneCount++;
+      if(li){
+        var marker = li.querySelector('span:first-child');
+        marker.textContent = isDone ? '✓' : '○';
+        marker.className = isDone ? 'tick' : 'todo';
+      }
+    });
+    var pct = Math.round(doneCount / completenessChecks.length * 100);
+    document.getElementById('completenessPct').textContent = pct + '% complete';
+    document.getElementById('completenessBar').style.width = pct + '%';
+    var railPct = document.getElementById('railProfilePct');
+    if(railPct) railPct.textContent = pct + '%';
+    var nextText = document.getElementById('nextMissingText');
+    if(doneCount === completenessChecks.length){
+      nextText.textContent = 'Profile complete ✓ — every detail a company asks for is here';
+    } else {
+      var noticeMissing = !completenessChecks[completenessChecks.length - 1].done();
+      var firstMissing = completenessChecks.filter(function(c){ return !c.done(); })[0];
+      var chosen = noticeMissing ? completenessChecks[completenessChecks.length - 1] : firstMissing;
+      var remaining = completenessChecks.length - doneCount;
+      nextText.textContent = (remaining === 1 ? 'One thing left that matters most: ' : 'Next thing that matters most: ') + chosen.label;
+    }
+    return pct;
+  }
+  var profileSaveState = document.getElementById('profileSaveState');
+  var profileSaveTimer = null;
+  function markProfileSaving(){
+    profileSaveState.textContent = 'Saving…';
+    profileSaveState.classList.add('saving');
+    clearTimeout(profileSaveTimer);
+    profileSaveTimer = setTimeout(function(){
+      profileSaveState.textContent = 'Saved · just now (held in this sample page)';
+      profileSaveState.classList.remove('saving');
+      updateCompleteness();
+      refreshSuggestions('after your profile edit');
+    }, 450);
+  }
+  document.querySelectorAll('#profileForm input, #profileForm textarea').forEach(function(el){
+    el.addEventListener('input', markProfileSaving);
+    el.addEventListener('change', markProfileSaving);
+  });
+  document.getElementById('profileForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    clearTimeout(profileSaveTimer);
+    profileSaveState.textContent = 'Saved · just now (held in this sample page)';
+    profileSaveState.classList.remove('saving');
+    updateCompleteness();
+    refreshSuggestions('after your profile edit');
+    showToast('Details saved — your completeness is up to date.');
+  });
+
+  /* ---- verified contact change requests (HR approval) ---- */
+  var crForm = document.getElementById('changeRequestForm');
+  var crField = document.getElementById('crField');
+  document.querySelectorAll('[data-request-change]').forEach(function(b){
+    b.addEventListener('click', function(){
+      crField.value = b.getAttribute('data-request-change');
+      crForm.classList.add('open');
+      document.getElementById('crValue').focus();
+    });
+  });
+  document.getElementById('crCancel').addEventListener('click', function(){
+    crForm.classList.remove('open');
+    document.getElementById('crError').classList.remove('show');
+  });
+  crForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    var field = crField.value;
+    var value = document.getElementById('crValue').value.trim();
+    var reason = document.getElementById('crReason').value.trim();
+    var err = document.getElementById('crError');
+    if(!value || !reason){ err.classList.add('show'); return; }
+    err.classList.remove('show');
+    var card = document.createElement('div');
+    card.className = 'request-card';
+    var current = field === 'Email' ? document.getElementById('currentEmail').textContent : document.getElementById('currentMobile').textContent;
+    card.innerHTML = '<div class="rq-top"><h4></h4><span class="pending-pill">Pending HR approval</span></div>' +
+      '<p>Requested new ' + (field === 'Email' ? 'email' : 'mobile number') + ': <b class="rq-value"></b> · Reason: <span class="rq-reason"></span></p>' +
+      '<p>Submitted <b>just now · Thu 19 Nov 2026</b> · Your current ' + (field === 'Email' ? 'email' : 'mobile number') + ' (<b>' + current + '</b>) stays active and verified until HR approves.</p>';
+    card.querySelector('h4').textContent = field + ' change';
+    card.querySelector('.rq-value').textContent = value;
+    card.querySelector('.rq-reason').textContent = '\u201C' + reason + '\u201D';
+    var list = document.getElementById('requestList');
+    list.insertBefore(card, list.firstChild);
+    document.getElementById('crOk').classList.add('show');
+    document.getElementById('crValue').value = '';
+    document.getElementById('crReason').value = '';
+    addFeedEvent('HR team', field + ' change requested — pending approval',
+      'Your request to change your ' + (field === 'Email' ? 'email' : 'mobile number') + ' is with the HR team. Your current detail stays active until they approve; you will be notified of the outcome here.',
+      'Just now · Thu 19 Nov 2026');
+    showToast('Request sent to HR — your current ' + (field === 'Email' ? 'email' : 'mobile number') + ' stays active until approval.');
+  });
+
+  /* ---- choices: chips, modes, selects, notifications, privacy ---- */
+  var prefSaveState = document.getElementById('prefSaveState');
+  var prefTimer = null;
+  function markPrefSaved(refresh){
+    prefSaveState.textContent = 'Saving…';
+    clearTimeout(prefTimer);
+    prefTimer = setTimeout(function(){
+      prefSaveState.textContent = 'Preferences saved · just now (held in this sample page)';
+      updateCompleteness();
+      if(refresh) refreshSuggestions('after your choices changed');
+    }, 400);
+  }
+  document.querySelectorAll('#roleChips .chip, #locationChips .chip').forEach(function(chip){
+    chip.addEventListener('click', function(){
+      var on = chip.getAttribute('aria-pressed') === 'true';
+      chip.setAttribute('aria-pressed', on ? 'false' : 'true');
+      markPrefSaved(true);
+    });
+  });
+  document.querySelectorAll('input[name="workMode"]').forEach(function(r){
+    r.addEventListener('change', function(){ markPrefSaved(true); });
+  });
+  ['domainSelect','availabilitySelect','visibilitySelect'].forEach(function(id){
+    document.getElementById(id).addEventListener('change', function(){ markPrefSaved(false); });
+  });
+  document.querySelectorAll('.notif-toggle').forEach(function(t){
+    t.addEventListener('change', function(){
+      var label = t.closest('.switch');
+      var word = label.querySelector('.track').nextSibling;
+      if(word && word.nodeType === 3) word.textContent = t.checked ? 'On' : 'Off';
+      showToast(t.checked ? 'Notification turned on.' : 'Notification turned off — status and recommendations stay separate.');
+    });
+  });
+  function bindUnblock(scope){
+    scope.querySelectorAll('[data-unblock]').forEach(function(b){
+      b.addEventListener('click', function(){ b.closest('.blocked-item').remove(); showToast('Block removed.'); });
+    });
+  }
+  bindUnblock(document);
+  document.getElementById('blockBtn').addEventListener('click', function(){
+    var input = document.getElementById('blockInput');
+    var name = input.value.trim();
+    if(!name){ showToast('Type a company name first.'); return; }
+    var item = document.createElement('span');
+    item.className = 'blocked-item';
+    item.innerHTML = '<span class="b-name"></span> <button type="button" data-unblock>Remove</button>';
+    item.querySelector('.b-name').textContent = name;
+    item.querySelector('button').setAttribute('aria-label', 'Remove ' + name + ' from blocked companies');
+    document.getElementById('blockedList').appendChild(item);
+    bindUnblock(item);
+    document.querySelectorAll('[data-job]').forEach(function(row){
+      if(row.querySelector('.j-co').textContent.trim().toLowerCase() === name.toLowerCase()){
+        row.style.display = 'none';
+      }
+    });
+    input.value = '';
+    showToast(name + ' blocked — they will never see your profile.');
+  });
+
+  /* ---- refer a friend + referral tracker ---- */
+  document.getElementById('referForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    var name = document.getElementById('rfName').value.trim();
+    var contact = document.getElementById('rfContact').value.trim();
+    var role = document.getElementById('rfRole').value.trim();
+    var err = document.getElementById('rfError');
+    if(!name || !contact || !role){ err.classList.add('show'); return; }
+    err.classList.remove('show');
+    var card = document.createElement('div');
+    card.className = 'referral-card';
+    card.innerHTML = '<div class="rf-top"><b></b><span class="rf-meta"></span></div>' +
+      '<ol class="ref-track">' +
+      '<li class="current">Referred<span class="rf-date">19 Nov</span></li>' +
+      '<li>Contacted<span class="rf-date">—</span></li>' +
+      '<li>In process<span class="rf-date">—</span></li>' +
+      '<li>Interviewing<span class="rf-date">—</span></li>' +
+      '<li>Placed<span class="rf-date">—</span></li></ol>';
+    card.querySelector('b').textContent = name;
+    card.querySelector('.rf-meta').textContent = role + ' · Referred 19 Nov 2026';
+    var list = document.getElementById('referralList');
+    list.insertBefore(card, list.firstChild);
+    document.getElementById('rfOk').classList.add('show');
+    document.getElementById('rfName').value = '';
+    document.getElementById('rfContact').value = '';
+    document.getElementById('rfRole').value = '';
+    addFeedEvent('Placement team', 'You referred ' + name,
+      'Thank you for thinking of ' + name + '. Ananya\u2019s team will reach out about ' + role + ', and you can follow the stages in your referral tracker — status only, always.',
+      'Just now · Thu 19 Nov 2026');
+    showToast(name + ' referred — watch their progress in your referral tracker.');
+  });
+
+  updateCompleteness();
+  refreshUnread();
+})();
+</script>
+</body>
+</html>
